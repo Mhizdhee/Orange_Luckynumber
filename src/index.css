@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --bg-radial-gradient: radial-gradient(
+    53.89% 137.96% at 46.11% 53.72%,
+    #242424 0%,
+    #151515 100%
+  );
+  --my-gradient: linear-gradient(180deg, #ffffff 0%, #999999 100%);
+
+  --border-gradient: radial-gradient(
+    103.91% 92.5% at 83.59% 0%,
+    #4c4c4c 0%,
+    #333333 50%,
+    #757575 75%,
+    #333333 100%
+  );
+  --box-shadow-inset: inset 0px 0px 10px 10px #2524244d;
+  --bg-gradient-section: linear-gradient(
+    180deg,
+    rgba(64, 64, 64, 0.5) -6.67%,
+    rgba(16, 16, 16, 0.9) 4.67%,
+    #101010 50%,
+    rgba(16, 16, 16, 0.9) 95.33%,
+    rgba(64, 64, 64, 0.5) 106.67%
+  );
+  --border-radial: radial-gradient(
+    69.85% 69.85% at -21.25% 33.09%,
+    #757575 0%,
+    #333333 50%,
+    #4c4c4c 75%,
+    #333333 100%
+  );
+}
+
+@font-face {
+  font-family: "RethinkSans-Bold";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-Bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RethinkSans-BoldItalic";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-BoldItalic.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RethinkSans-ExtraBold";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-ExtraBold.ttf")
+    format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RethinkSans-ExtraBoldItalic";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-ExtraBoldItalic.ttf")
+    format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RethinkSans-Italic";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-Italic.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RethinkSans-Medium";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-Medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RethinkSans-MediumItalic";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-MediumItalic.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RethinkSans-Regular";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RethinkSans-SemiBold";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-SemiBold.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RethinkSans-SemiBoldItalic";
+  src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-SemiBoldItalic.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
