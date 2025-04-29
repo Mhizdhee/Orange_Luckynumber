@@ -3,7 +3,10 @@ import Location from "../assets/Icons/location.png";
 import Contact from "../assets/Icons/call.png";
 import Mail from "../assets/Icons/mail.png";
 import Share from "../assets/Icons/share.png";
-import { Link } from "react-scroll";
+// import { Link } from "react-scroll";
+// import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 import OrangeLogo from "../assets/Images/Orange_logo.png";
 import LuckyLogo from "../assets/Images/Lucky Number Logo.png";
 import ContactModal from "../Components/ContactModal";
@@ -31,7 +34,7 @@ const Footer: React.FC = () => {
 
             <div className="flex flex-col lg:flex-row gap-6">
               <div className="flex flex-col gap-6 w-full cursor-pointer">
-                <Link
+                <ScrollLink
                   to="how-to-play"
                   smooth={true}
                   duration={500}
@@ -39,9 +42,9 @@ const Footer: React.FC = () => {
                   className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
                 >
                   Comment jouer
-                </Link>
+                </ScrollLink>
 
-                <Link
+                <ScrollLink
                   // to="/Foire aux questions"
                   to="faq"
                   smooth={true}
@@ -50,8 +53,8 @@ const Footer: React.FC = () => {
                   className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
                 >
                   Foire aux questions
-                </Link>
-                <Link
+                </ScrollLink>
+                <ScrollLink
                   to="testimonial"
                   smooth={true}
                   duration={500}
@@ -59,28 +62,28 @@ const Footer: React.FC = () => {
                   className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
                 >
                   Témoignages
-                </Link>
+                </ScrollLink>
               </div>
 
               <div className="flex flex-col gap-6 lg:ml-6 w-full">
-                <Link
-                  to="/Jouez de manière responsable"
+                <RouterLink
+                  to="/Jouez-de-manière-responsable"
                   className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
                 >
                   Jouez de manière responsable
-                </Link>
-                <Link
-                  to="/Gains et paiements"
+                </RouterLink>
+                <RouterLink
+                  to="/Gains-et-paiements"
                   className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
                 >
                   Gains et paiements
-                </Link>
-                <Link
-                  to="/Règlement du jeu"
+                </RouterLink>
+                <RouterLink
+                  to="/Règlement-du-jeu"
                   className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
                 >
                   Règlement du jeu
-                </Link>
+                </RouterLink>
               </div>
             </div>
           </div>
@@ -116,7 +119,7 @@ const Footer: React.FC = () => {
                 </a>
               </div>
             </div>
-            <Link
+            <RouterLink
               to="#contact-us"
               onClick={() => setIsContactOpen(true)}
               className="flex items-center gap-2"
@@ -126,7 +129,7 @@ const Footer: React.FC = () => {
               <p className="font-[Inter] font-normal text-[14px] leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]">
                 Envoyez un message
               </p>
-            </Link>
+            </RouterLink>
           </div>
         </div>
         <ContactModal
