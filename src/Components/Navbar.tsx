@@ -12,12 +12,12 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className=" lg:bg-[--bg-radial-gradient]  py-3 px-4 lg:px-30 flex justify-between items-center fixed top-0 left-0 right-0 z-10 "
+        className=" lg:bg-[--bg-radial-gradient]  py-3 px-4 lg:px-30   flex justify-between items-center fixed top-0 left-0 right-0 z-10 "
         style={{
           background: "var(--bg-radial-gradient)",
         }}
       >
-        <div className="flex items-center">
+        <div className="flex items-center  ">
           <img
             src={OrangeLogo}
             alt="logo"

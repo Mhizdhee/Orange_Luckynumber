@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import Location from "../assets/Icons/location.png";
-import Contact from "../assets/Icons/call.png";
-import Mail from "../assets/Icons/mail.png";
-import Share from "../assets/Icons/share.png";
-// import { Link } from "react-scroll";
-// import { Link } from "react-router-dom";
+import Location from "../assets/Icons/location.svg";
+import Contact from "../assets/Icons/call.svg";
+import Mail from "../assets/Icons/mail.svg";
+import Share from "../assets/Icons/share.svg";
 import { Link as RouterLink } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import OrangeLogo from "../assets/Images/Orange_logo.png";

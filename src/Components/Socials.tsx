@@ -1,8 +1,8 @@
 import React from "react";
-import Twitter from "../assets/Icons/twitter.png";
-import Facebook from "../assets/Icons/facebook.png";
-import Linkedn from "../assets/Icons/lnkedn.png";
-import Instagram from "../assets/Icons/instagram.png";
+import Twitter from "../assets/Icons/twitter.svg";
+import Facebook from "../assets/Icons/facebook.svg";
+import Linkedn from "../assets/Icons/lnkedn.svg";
+import Instagram from "../assets/Icons/instagram.svg";
 
 const Socials: React.FC = () => {
   return (
@@ -10,10 +10,18 @@ const Socials: React.FC = () => {
       {/* Bottom Footer */}
       <div className="flex flex-col py-6 px-6 bg-[#242424] lg:flex-row lg:px-30  justify-between items-center gap-6">
         <div className="flex gap-6">
-          <a href="#" rel="noopener noreferrer" className="hover:text-white">
+          <a
+            href="#"
+            rel="noopener noreferrer"
+            className="hover:text-white text-center"
+          >
             <img src={Twitter} alt="twitter" />
           </a>
-          <a href="#" rel="noopener noreferrer" className="hover:text-white">
+          <a
+            href="#"
+            rel="noopener noreferrer"
+            className="hover:text-white  flex items-center"
+          >
             <img src={Facebook} alt="facebook" />
           </a>
           <a href="#" rel="noopener noreferrer" className="hover:text-white">

@@ -33,6 +33,15 @@
   );
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @font-face {
   font-family: "RethinkSans-Bold";
   src: url("./assets/Fonts/Rethink_Sans/static/RethinkSans-Bold.ttf")
