@@ -14,7 +14,8 @@ const faqs = [
   },
   {
     question: "Comment souscrire et s’enregistrer sur le service ?",
-    answer: "En envoyant le mot-clé NO1, NO2, NO3, au code court « 7771 ».",
+    answer:
+      "En envoyant le mot-clé NO1, NO2, NO3, au code court « 7771 ». \nOu en composant le *590*5#",
   },
   {
     question: "Comment savoir que j’ai été enregistré avec succès ?",
@@ -41,12 +42,12 @@ const faqs = [
   {
     question: "Comment faire pour annuler mon abonnement à NUMÉRO D’OR ?",
     answer:
-      "Pour vous désinscrire du service, vous devez envoyer les mots-clés STOP NO1, STOP NO2, STOP NO3 au 7771, vous recevrez alors une confirmation par SMS que vous avez été retiré du service.",
+      "Pour vous désinscrire du service, vous devez envoyer les mots-clés STOP NO1, STOP NO2, STOP NO3 au 7771, vous recevrez alors une confirmation par SMS que vous avez été retiré du service. \nOu en composant *590*5#.",
   },
   {
     question: "Comment faire pour savoir que j’ai gagné ?",
     answer:
-      "Un SMS annonçant les 5 derniers chiffres du numéro tiré sera envoyé à tous les abonnés participants.",
+      "Un SMS annonçant les 6 derniers chiffres du numéro tiré sera envoyé à tous les abonnés participants.",
   },
   {
     question: "Quand pourrai-je recevoir mon prix si je gagne ?",

@@ -14,8 +14,8 @@ const TermsAndConditions: React.FC = () => {
           ARTICLE 1er : DENOMINATION ET PRINCIPE DU JEU
         </h4>
         <p className="">
-          ORANGE CI et la LONACI décident du lancement du service dénommé «
-          NUMERO D’OR ».
+          ORANGE CI et la LONACI décident du lancement du service dénommé «{" "}
+          <b> NUMERO D’OR ».</b>
         </p>
         <p>
           Ce jeu a pour but d’accompagner et de récompenser la fidélité des
@@ -107,16 +107,17 @@ const TermsAndConditions: React.FC = () => {
         </p>
         <ul className="list-disc ml-8">
           <li>
-            Soit NO1 par sms au 7717 pour le pack de cinquante (50) FCFA valable
-            vingt-quatre (24) heures, renouvelable automatiquement
+            Soit <b>NO1 </b> par sms au 7717 pour le pack de cinquante (50) FCFA
+            valable vingt-quatre (24) heures, renouvelable automatiquement
           </li>
           <li>
-            Soit NO2 par sms au 7717 pour le pack de cent (100) FCFA valable
-            vingt-quatre (24) heures, renouvelable automatiquement
+            Soit <b>NO2 </b>par sms au 7717 pour le pack de cent (100) FCFA
+            valable vingt-quatre (24) heures, renouvelable automatiquement
           </li>
           <li>
-            Soit NO3 par sms au 7717 pour le pack de deux cent cinquante (250)
-            FCFA valable vingt-quatre (24) heures, renouvelable automatiquement
+            Soit <b>NO3</b> par sms au 7717 pour le pack de deux cent cinquante
+            (250) FCFA valable vingt-quatre (24) heures, renouvelable
+            automatiquement
           </li>
         </ul>
         <p>Un participant peut souscrire à plus d’un pack.</p>
@@ -163,8 +164,8 @@ const TermsAndConditions: React.FC = () => {
           été exclu du jeu.
         </p>
         <p>
-          Le participant pourra également appeler le centre d’appels au 555 afin
-          de demander à être désinscrit du jeu.
+          Le participant pourra également appeler le centre d’appels au 0808
+          afin de demander à être désinscrit du jeu.
         </p>
         <p>
           Pour réactiver sa participation au jeu, le participant devra envoyer
@@ -206,13 +207,13 @@ const TermsAndConditions: React.FC = () => {
           <table className="min-w-full table-auto border border-gray-300 mt-10">
             <thead className="">
               <tr>
-                <th className="border border-gray-300 px-4 py-2 text-left whitespace-nowrap">
+                <th className="border border-gray-300 px-4 font-normal py-2 text-center whitespace-nowrap">
                   Correspondance séquentielle
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-left">
+                <th className="border border-gray-300 px-4 py-2 font-normal text-center">
                   MSISDN
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-center">
+                <th className="border border-gray-300 px-4 py-2 font-normal text-center">
                   Nombre maximum de Gagnants
                 </th>
               </tr>
@@ -222,7 +223,7 @@ const TermsAndConditions: React.FC = () => {
                 <td className="border border-gray-300 px-4 py-2">
                   8 Chiffres correspondants
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 text-center">
                   07<span className="text-red-500">01234567</span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
@@ -233,7 +234,7 @@ const TermsAndConditions: React.FC = () => {
                 <td className="border border-gray-300 px-4 py-2">
                   7 Chiffres correspondants
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 text-center">
                   07<span className="text-red-500">01234567</span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
@@ -244,7 +245,7 @@ const TermsAndConditions: React.FC = () => {
                 <td className="border border-gray-300 px-4 py-2">
                   6 Chiffres correspondants
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 text-center">
                   07<span className="text-red-500">01234567</span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
@@ -255,7 +256,7 @@ const TermsAndConditions: React.FC = () => {
                 <td className="border border-gray-300 px-4 py-2">
                   5 Chiffres correspondants
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 text-center">
                   07<span className="text-red-500">01234567</span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
@@ -263,10 +264,10 @@ const TermsAndConditions: React.FC = () => {
                 </td>
               </tr>
               <tr>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 ">
                   4 Chiffres correspondants
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 text-center">
                   07<span className="text-red-500">01234567</span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
@@ -274,10 +275,10 @@ const TermsAndConditions: React.FC = () => {
                 </td>
               </tr>
               <tr>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 ">
                   3 Chiffres correspondants
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 text-center">
                   07<span className="text-red-500">01234567</span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
@@ -322,16 +323,18 @@ const TermsAndConditions: React.FC = () => {
               </tr>
 
               <tr>
-                <th className="border px-4 py-2 text-left whitespace-nowrap">
+                <th className="border px-4 py-2 text-left whitespace-nowrap font-normal">
                   Correspondance séquentielle
                 </th>
-                <th className="border px-4 py-2 text-left">
+                <th className="border px-4 py-2 text-left font-normal">
                   MSISDN (Numéro de téléphone)
                 </th>
-                <th className="border px-4 py-2 text-left">
+                <th className="border px-4 py-2 text-left font-normal">
                   Nombre maximum Gagnants
                 </th>
-                <th className="border px-4 py-2 text-left">Nature des lots</th>
+                <th className="border px-4 py-2 text-left font-normal">
+                  Nature des lots
+                </th>
                 <th className="border px-4 py-2 text-left whitespace-nowrap">
                   Pack 50 FCFA
                 </th>
@@ -419,6 +422,256 @@ const TermsAndConditions: React.FC = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div className="space-y-4 mt-8">
+        <p>
+          Si l’abonné ne parvient pas à renouveler sa souscription à cause du
+          solde insuffisant, une micro-facturation sera appliquée pour lui
+          permettre d’accéder au jeu et tenter de gagner.
+        </p>
+        <p>
+          Ce pendant la répartition des lots sera proportionnelle aux différents
+          montant facturés. Ce qui donnera un tableau différent :
+        </p>
+      </div>
+
+      <div className="overflow-x-auto w-full mt-10">
+        <table className="min-w-full table-auto border-collapse">
+          <thead>
+            <tr>
+              <th colSpan={1} className="py-2 px-4 border"></th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                Souscription de 250F
+              </th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                200F
+              </th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                150F
+              </th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                Souscription de 100F
+              </th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                80F
+              </th>
+              {/* <th colSpan={1} className="py-2 px-4 border"></th> */}
+            </tr>
+
+            <tr className="bg-gray-100">
+              <th className="px-4 py-2 border text-centertext-sm whitespace-nowrap">
+                Correspondances
+              </th>
+              <th className="px-4 py-2 border text-sm text-enter">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Cagnottes (FCFA)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">8</td>
+              <td className="px-4 py-2 border text-sm text-center">
+                1,000,000
+              </td>
+              <td className="px-4 py-2 border text-sm text-center">800,000</td>
+              <td className="px-4 py-2 border text-sm text-center">600,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">500,000</td>
+              <td className="px-4 py-2 border text-sm text-center">400,000</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">7</td>
+              <td className="px-4 py-2 border text-sm text-center">200,000</td>
+              <td className="px-4 py-2 border text-sm text-center">160,000</td>
+              <td className="px-4 py-2 border text-sm text-center">120,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">100,000</td>
+              <td className="px-4 py-2 border text-sm text-center">80,000</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">6</td>
+              <td className="px-4 py-2 border text-sm text-center">75,000</td>
+              <td className="px-4 py-2 border text-sm text-center">60,000</td>
+              <td className="px-4 py-2 border text-sm text-center">45,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">50,000</td>
+              <td className="px-4 py-2 border text-sm text-center">40,000</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">5</td>
+              <td className="px-4 py-2 border text-sm text-center">15,000</td>
+              <td className="px-4 py-2 border text-sm text-center">12,000</td>
+              <td className="px-4 py-2 border text-sm text-center">9,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">10,000</td>
+              <td className="px-4 py-2 border text-sm text-center">8,000</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">4</td>
+              <td className="px-4 py-2 border text-sm text-center">4,000</td>
+              <td className="px-4 py-2 border text-sm text-center">3,200</td>
+              <td className="px-4 py-2 border text-sm text-center">2,400</td>
+
+              <td className="px-4 py-2 border text-sm text-center">2,000</td>
+              <td className="px-4 py-2 border text-sm text-center">1600</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">3</td>
+              <td className="px-4 py-2 border text-sm text-center">700</td>
+              <td className="px-4 py-2 border text-sm text-center">560</td>
+              <td className="px-4 py-2 border text-sm text-center">520</td>
+
+              <td className="px-4 py-2 border text-sm text-center">500</td>
+              <td className="px-4 py-2 border text-sm text-center">400</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="overflow-x-auto w-full mt-10">
+        <table className="min-w-full table-auto border-collapse">
+          <thead>
+            <tr>
+              <th colSpan={1} className="py-2 px-4 border"></th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                60F
+              </th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                Souscription de 50F
+              </th>
+              <th
+                colSpan={1}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                40F
+              </th>
+              <th
+                colSpan={2}
+                className="text-center px-4 py-1 border text-sm font-semibold"
+              >
+                30F
+              </th>
+
+              {/* <th colSpan={1} className="py-2 px-4 border"></th> */}
+            </tr>
+
+            <tr className="bg-gray-100">
+              <th className="px-4 py-2 border text-centertext-sm whitespace-nowrap">
+                Correspondances
+              </th>
+              <th className="px-4 py-2 border text-sm text-enter">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Cagnottes (FCFA)
+              </th>
+              <th className="px-4 py-2 border text-sm text-center">
+                Types de prix
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">8</td>
+              <td className="px-4 py-2 border text-sm text-center">300,000</td>
+              <td className="px-4 py-2 border text-sm text-center">250,000</td>
+              <td className="px-4 py-2 border text-sm text-center">200,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">150,000</td>
+              <td className="px-4 py-2 border text-sm text-center">Cash</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">7</td>
+              <td className="px-4 py-2 border text-sm text-center">60,000</td>
+              <td className="px-4 py-2 border text-sm text-center">50,000</td>
+              <td className="px-4 py-2 border text-sm text-center">40,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">30,000</td>
+              <td className="px-4 py-2 border text-sm text-center">Cash</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">6</td>
+              <td className="px-4 py-2 border text-sm text-center">30,000</td>
+              <td className="px-4 py-2 border text-sm text-center">25,000</td>
+              <td className="px-4 py-2 border text-sm text-center">20,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">15,000</td>
+              <td className="px-4 py-2 border text-sm text-center">Cash</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">5</td>
+              <td className="px-4 py-2 border text-sm text-center">6,000</td>
+              <td className="px-4 py-2 border text-sm text-center">5,000</td>
+              <td className="px-4 py-2 border text-sm text-center">4,000</td>
+
+              <td className="px-4 py-2 border text-sm text-center">3,000</td>
+              <td className="px-4 py-2 border text-sm text-center">Cash</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">4</td>
+              <td className="px-4 py-2 border text-sm text-center">1,200</td>
+              <td className="px-4 py-2 border text-sm text-center">700</td>
+              <td className="px-4 py-2 border text-sm text-center">560</td>
+
+              <td className="px-4 py-2 border text-sm text-center">420</td>
+              <td className="px-4 py-2 border text-sm text-center">
+                Cash/Credit
+              </td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border text-sm text-center">3</td>
+              <td className="px-4 py-2 border text-sm text-center">300</td>
+              <td className="px-4 py-2 border text-sm text-center">300</td>
+              <td className="px-4 py-2 border text-sm text-center">240</td>
+
+              <td className="px-4 py-2 border text-sm text-center">180</td>
+              <td className="px-4 py-2 border text-sm text-center">
+                {" "}
+                Cash/Credit
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <div className="space-y-4">

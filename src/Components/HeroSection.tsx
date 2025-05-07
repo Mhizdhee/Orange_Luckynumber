@@ -14,21 +14,32 @@ const HeroSection: React.FC = () => {
   );
 
   useEffect(() => {
-    const targetNumbers = Array.from({ length: 10 }, () =>
+    // Fixed prefix
+    const prefix = ["0", "7"];
+
+    // Fixed placeholders for 'X'
+    const middle = ["X", "X"];
+
+    // Generate 6 random digits
+    const suffixDigits = Array.from({ length: 6 }, () =>
       Math.floor(Math.random() * 10)
     );
+
     let frame = 0;
     const maxFrames = 40;
+
     const interval = setInterval(() => {
       setAnimatedNumbers((prev) =>
-        prev.map((_, i) => {
-          if (frame < maxFrames) {
-            return Math.floor(Math.random() * 10).toString();
-          } else {
-            if (i === 5 || i === 6) return "X";
-            return targetNumbers[i].toString();
-          }
-        })
+        prefix.concat(
+          middle,
+          suffixDigits.map((digit, i) => {
+            if (frame < maxFrames) {
+              return Math.floor(Math.random() * 10).toString();
+            } else {
+              return digit.toString();
+            }
+          })
+        )
       );
       frame++;
       if (frame > maxFrames) clearInterval(interval);
@@ -66,7 +77,7 @@ const HeroSection: React.FC = () => {
                   </span>
                   <input
                     type="tel"
-                    placeholder="0123456789"
+                    placeholder="0723456789"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="hidden lg:flex bg-[#FFFFFF] py-[10px] text-[16px] font-[Inter] font-normal leading-[24px]  placeholder:text-[#CCCCCC] pl-17 pr-4 outline-none w-full"

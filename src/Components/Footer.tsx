@@ -94,7 +94,8 @@ const Footer: React.FC = () => {
             <div className="flex items-start gap-2">
               <img src={Location} alt="location" />
               <p className="font-[Inter] font-normal text-[14px] leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]">
-                Votre adresse ici
+                adresse : Abidjan, Cocody, Riviera Golf, « Orange Village », 11
+                BP 202 Abidjan 11{" "}
               </p>
             </div>
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 w-full hover:text-[#FFFFFF]">

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NumberImg from "../assets/Images/BackgroundDis.png";
-import ConfettiLeft from "../assets/Images/LeftConfetti.png";
-import ConfettiRight from "../assets/Images/RightConfetti.png";
+// import ConfettiLeft from "../assets/Images/LeftConfetti.png";
+// import ConfettiRight from "../assets/Images/RightConfetti.png";
+import Confettis from "../assets/Images/confettis.png";
+import MobileConfettis from "../assets/Images/mobile-confettis.png";
 import { motion } from "framer-motion";
 
 interface LuckyNumberBarProps {
@@ -35,23 +37,33 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
   }, [triggerRef]);
 
   useEffect(() => {
-    const targetNumbers = Array.from({ length: 10 }, () =>
+    // Fixed prefix
+    const prefix = ["0", "7"];
+
+    // Fixed placeholders for 'X'
+    const middle = ["X", "X"];
+
+    // Generate 6 random digits
+    const suffixDigits = Array.from({ length: 6 }, () =>
       Math.floor(Math.random() * 10)
     );
+
     let frame = 0;
     const maxFrames = 40;
+
     const interval = setInterval(() => {
       setAnimatedNumbers((prev) =>
-        prev.map((_, i) => {
-          if (frame < maxFrames) {
-            return Math.floor(Math.random() * 10).toString();
-          } else {
-            if (i === 5 || i === 6) return "X";
-            return targetNumbers[i].toString();
-          }
-        })
+        prefix.concat(
+          middle,
+          suffixDigits.map((digit, i) => {
+            if (frame < maxFrames) {
+              return Math.floor(Math.random() * 10).toString();
+            } else {
+              return digit.toString();
+            }
+          })
+        )
       );
-
       frame++;
       if (frame > maxFrames) clearInterval(interval);
     }, 50);
@@ -61,13 +73,24 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
 
   return (
     <>
-      {showBar && (
+      {/* {showBar && (
         <div className="fixed top-13 w-full  overflow-hidden z-50 bg-[#252424] py-3 lg:py-4">
           <div className="lg:flex lg:items-center lg:justify-center lg:gap-19 mx-4 xl:mx-0  ">
-            <img src={ConfettiLeft} alt="left" className=" " />
-            <div className=" flex flex-col lg:flex-row items-center  gap-6">
+            <img
+              src={Confettis}
+              alt="left"
+              className="hidden lg:block relative "
+            />
+
+            <img
+              src={MobileConfettis}
+              alt="left"
+              className="lg:hidden block relative "
+            />
+
+            <div className="absolute top-0 left-0 flex flex-col lg:flex-row items-center  gap-6">
               <div
-                className="bg-[#3F3F3F] lg:w-auto w-[281px] h-[40px] flex items-center justify-between gap-4 text-[#FFFFFF]  rounded-[12px] border py-2  lg:py-3 px-4 border-[var( --border-gradient)]"
+                className="bg-[#3F3F3F] lg:w-auto w-[281px] h-[56px] flex items-center justify-between gap-4 text-[#FFFFFF]  rounded-[12px] border py-2   px-4 border-[var( --border-gradient)]"
                 style={{
                   border: "1px solid transparent",
                   borderImage: "var(--border-gradient)",
@@ -79,7 +102,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
                 </p>
                 <div className="w-[6px] h-[6px] lg:w-2 lg:h-2  bg-[#8F8F8F] rounded-full"></div>
               </div>
-              {/*  rolling numbers) */}
+              rolling numbers)
               <div className="relative w-[281px] h-[60px] lg:w-[212px] lg:h-[56px]">
                 <img
                   src={NumberImg}
@@ -120,7 +143,83 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
                 </div>
               </div>
             </div>
-            <img src={ConfettiRight} alt="right" className="hidden xl:block" />
+          </div>
+        </div>
+      )} */}
+
+      {showBar && (
+        <div className="fixed top-13 w-full z-50">
+          <div className="relative w-full overflow-hidden">
+            {/* Background Image */}
+            <img
+              src={Confettis}
+              alt="desktop-bg"
+              className="hidden md:block w-full h-auto"
+            />
+            <img
+              src={MobileConfettis}
+              alt="mobile-bg"
+              className="block md:hidden w-full h-auto"
+            />
+
+            {/* Overlay Content */}
+            <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center gap-6 ">
+              {/* Left pill box */}
+              <div
+                className="bg-[#3F3F3F] w-[281px] md:w-auto h-[56px]  flex items-center justify-between gap-4 text-white rounded-[12px] border px-4 md:py-3 py-2"
+                style={{
+                  border: "1px solid transparent",
+                  borderImage: "var(--border-gradient)",
+                }}
+              >
+                <div className="w-[6px] h-[6px] md:w-2 md:h-2 bg-[#8F8F8F] rounded-full" />
+                <p className="text-[13px] lg:text-[16px] whitespace-nowrap font-[Inter] leading-[18px] lg:leading-[24px]">
+                  Numéro d’Or du jour
+                </p>
+                <div className="w-[6px] h-[6px] md:w-2 md:h-2 bg-[#8F8F8F] rounded-full" />
+              </div>
+
+              {/* Rolling number box */}
+              <div className="relative w-[281px] md:w-[212px] h-[60px] md:h-[56px]">
+                <img
+                  src={NumberImg}
+                  alt="number-bg"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center gap-1 px-8  md:px-4">
+                  {animatedNumbers.map((num, index) =>
+                    num === "X" ? (
+                      <div
+                        key={index}
+                        className="text-[21px] leading-[22px] font-bold font-[Inter] text-transparent bg-gradient-to-b from-white to-[#999999] bg-clip-text"
+                      >
+                        X
+                      </div>
+                    ) : (
+                      <div
+                        key={index}
+                        className="w-[30px] h-[50px] overflow-hidden relative"
+                      >
+                        <motion.div
+                          initial={{ y: 0 }}
+                          animate={{ y: `-${Number(num) * 50}px` }}
+                          transition={{ duration: 1.2, ease: "easeOut" }}
+                        >
+                          {[...Array(10)].map((_, i) => (
+                            <div
+                              key={i}
+                              className="h-[50px] flex items-center justify-center text-[21px] leading-[22px] font-bold font-[Inter] text-transparent bg-gradient-to-b from-white to-[#999999] bg-clip-text"
+                            >
+                              {i}
+                            </div>
+                          ))}
+                        </motion.div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
