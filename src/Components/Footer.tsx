@@ -103,7 +103,7 @@ const Footer: React.FC = () => {
                 <img src={Contact} alt="contact" />
 
                 <p className="font-[Inter] font-normal text-[14px]  leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]">
-                  +2374446693434
+                  {/* +2374446693434 */} 0808
                 </p>
               </div>
 
