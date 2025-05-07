@@ -108,6 +108,30 @@ const WinningsAndPayments: React.FC = () => {
           </tbody>
         </table>
       </div>
+      {/* Payment Information */}
+      {/* <div className="mt-10">
+        <h2 className="text-xl font-semibold mb-2">Payment Timeline</h2>
+        <p className="mb-4">
+          All winnings are paid within 7 working days after verification.
+          Winners will be contacted via SMS and phone call.
+        </p>
+      </div> */}
+
+      {/* Disclaimer */}
+      {/* <div className="mt-6">
+        <h2 className="text-xl font-semibold mb-2">Conditions</h2>
+        <ul className="list-disc list-inside">
+          <li>Winners must be subscribed at the time of draw.</li>
+          <li>Payments will be made only to verified numbers.</li>
+          <li>Only users with valid MSISDNs are eligible.</li>
+        </ul>
+      </div> */}
+
+      {/* Support
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-2">Need Help?</h2>
+        <p>Contact our support via email: support@example.com</p>
+      </div> */}
     </div>
   );
 };

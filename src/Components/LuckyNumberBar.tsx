@@ -52,10 +52,10 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     const maxFrames = 40;
 
     const interval = setInterval(() => {
-      setAnimatedNumbers((prev) =>
+      setAnimatedNumbers((_prev) =>
         prefix.concat(
           middle,
-          suffixDigits.map((digit, i) => {
+          suffixDigits.map((digit, _i) => {
             if (frame < maxFrames) {
               return Math.floor(Math.random() * 10).toString();
             } else {
