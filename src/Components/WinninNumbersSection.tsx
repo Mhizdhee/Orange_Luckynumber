@@ -19,7 +19,7 @@ const phoneNumbers = [
 ];
 
 const WinningNumbersSection: React.FC = () => {
-  const [showAll, setShowAll] = useState(false);
+  const [showAll] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const directionRef = useRef<"left" | "right">("left");
   const animationRef = useRef<number | null>(null);
