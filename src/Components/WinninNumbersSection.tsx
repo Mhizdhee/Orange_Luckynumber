@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const phoneNumbers = [
   "070155XX55",
@@ -22,6 +23,7 @@ const WinningNumbersSection: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const directionRef = useRef<"left" | "right">("left");
   const animationRef = useRef<number | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (showAll) return;
@@ -60,35 +62,35 @@ const WinningNumbersSection: React.FC = () => {
 
   const scrollItems = [...phoneNumbers, ...phoneNumbers];
 
-  if (showAll) {
-    return (
-      <div className="bg-[#121212] px-4 py-6 ">
-        <div className="max-w-lg mx-auto">
-          <button
-            onClick={() => setShowAll(false)}
-            className="font-[Inter]  text-[14px] leading-[22px] font-normal mb-6 text-[#8F8F8F] hover:text-white cursor-pointer"
-          >
-            ← Back
-          </button>
-          <div className="max-w-md  bg-[#242424]  pt-18 px-4 pb-4 shadow-md text-white">
-            <h3 className="lg:text-[24px] text-[18px] leading-[26px] font-['RethinkSans-Bold'] font-bold lg:leading-[32px] text-center mb-4">
-              22-06-2025 Gagnants
-            </h3>
+  // if (showAll) {
+  //   return (
+  //     <div className="bg-[#121212] px-4 py-6 ">
+  //       <div className="max-w-lg mx-auto">
+  //         <button
+  //           onClick={() => setShowAll(false)}
+  //           className="font-[Inter]  text-[14px] leading-[22px] font-normal mb-6 text-[#8F8F8F] hover:text-white cursor-pointer"
+  //         >
+  //           ← Back
+  //         </button>
+  //         <div className="max-w-md  bg-[#242424]  pt-18 px-4 pb-4 shadow-md text-white">
+  //           <h3 className="lg:text-[24px] text-[18px] leading-[26px] font-['RethinkSans-Bold'] font-bold lg:leading-[32px] text-center mb-4">
+  //             22-06-2025 Gagnants
+  //           </h3>
 
-            <div className="flex flex-col  gap-5  bg-[#151515] overflow-y-auto max-h-96">
-              <ol className="list-decimal py-6 px-12 space-y-5  font-['RethinkSans-SemiBold'] font-semibold text-[16px] leading-[24px] text-justify text-[#8F8F8F]">
-                {phoneNumbers.map((num, idx) => (
-                  <li key={idx} className="">
-                    {num}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  //           <div className="flex flex-col  gap-5  bg-[#151515] overflow-y-auto max-h-96">
+  //             <ol className="list-decimal py-6 px-12 space-y-5  font-['RethinkSans-SemiBold'] font-semibold text-[16px] leading-[24px] text-justify text-[#8F8F8F]">
+  //               {phoneNumbers.map((num, idx) => (
+  //                 <li key={idx} className="">
+  //                   {num}
+  //                 </li>
+  //               ))}
+  //             </ol>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="bg-[#242424] px-4 xl:px-30 py-6  w-full overflow-hidden">
@@ -105,7 +107,7 @@ const WinningNumbersSection: React.FC = () => {
           <div className="block xl:hidden">
             <button
               className="text-[#8F8F8F]  font-[Inter]  text-[14px] leading-[22px] font-normal cursor-pointer"
-              onClick={() => setShowAll(true)}
+              onClick={() => navigate("/winning-numbers")}
             >
               View All
             </button>
@@ -129,7 +131,7 @@ const WinningNumbersSection: React.FC = () => {
         <div className="hidden xl:block pl-0 md:pl-4 border-l md:border-l border-l-[#8F8F8F]">
           <button
             className="text-[#8F8F8F]  font-[Inter]  text-[14px] leading-[22px] font-normal cursor-pointer hover:text-white"
-            onClick={() => setShowAll(true)}
+            onClick={() => navigate("/winning-numbers")}
           >
             View All
           </button>
