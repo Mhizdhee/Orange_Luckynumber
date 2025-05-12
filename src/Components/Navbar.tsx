@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import OrangeLogo from "../assets/Images/Orange_logo.png";
-import LuckyLogo from "../assets/Images/Lucky Number Logo.png";
+import LuckyLogo from "../assets/Images/luckynumberlogo.png";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-scroll";
 import ContactModal from "../Components/ContactModal";

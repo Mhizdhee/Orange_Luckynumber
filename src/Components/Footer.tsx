@@ -6,7 +6,7 @@ import Share from "../assets/Icons/share.svg";
 import { Link as RouterLink } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import OrangeLogo from "../assets/Images/Orange_logo.png";
-import LuckyLogo from "../assets/Images/Lucky Number Logo.png";
+import LuckyLogo from "../assets/Images/luckynumberlogo.png";
 import ContactModal from "../Components/ContactModal";
 
 const Footer: React.FC = () => {
