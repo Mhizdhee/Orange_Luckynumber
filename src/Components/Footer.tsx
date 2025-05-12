@@ -43,6 +43,16 @@ const Footer: React.FC = () => {
                 </ScrollLink>
 
                 <ScrollLink
+                  to="testimonial"
+                  smooth={true}
+                  duration={500}
+                  offset={-80}
+                  className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
+                >
+                  Témoignages
+                </ScrollLink>
+
+                <ScrollLink
                   // to="/Foire aux questions"
                   to="faq"
                   smooth={true}
@@ -51,15 +61,6 @@ const Footer: React.FC = () => {
                   className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
                 >
                   Foire aux questions
-                </ScrollLink>
-                <ScrollLink
-                  to="testimonial"
-                  smooth={true}
-                  duration={500}
-                  offset={-80}
-                  className="font-[Inter] font-normal text-[14px] whitespace-nowrap leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]"
-                >
-                  Témoignages
                 </ScrollLink>
               </div>
 

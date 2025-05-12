@@ -42,20 +42,6 @@ const Navbar: React.FC = () => {
 
             <li>
               <Link
-                to="faq"
-                smooth={true}
-                duration={500}
-                offset={-80}
-                className="text-[#8F8F8F] hover:text-[#FFFFFF] text-[14px] font-[Inter] font-normal leading-[22px]"
-              >
-                Foire aux questions
-              </Link>
-            </li>
-          </ul>
-
-          <ul className="flex items-center gap-10 cursor-pointer">
-            <li>
-              <Link
                 to="testimonial"
                 smooth={true}
                 duration={500}
@@ -63,6 +49,20 @@ const Navbar: React.FC = () => {
                 className="text-[#8F8F8F] hover:text-[#FFFFFF] text-[14px] font-[Inter] font-normal leading-[22px]"
               >
                 Témoignages
+              </Link>
+            </li>
+          </ul>
+
+          <ul className="flex items-center gap-10 cursor-pointer">
+            <li>
+              <Link
+                to="faq"
+                smooth={true}
+                duration={500}
+                offset={-80}
+                className="text-[#8F8F8F] hover:text-[#FFFFFF] text-[14px] font-[Inter] font-normal leading-[22px]"
+              >
+                Foire aux questions
               </Link>
             </li>
 
@@ -109,18 +109,6 @@ const Navbar: React.FC = () => {
             </li>
             <li>
               <Link
-                to="faq"
-                smooth={true}
-                duration={500}
-                offset={-80}
-                className="text-[#8F8F8F] hover:text-[#FFFFFF] font-['RethinkSans-Bold'] text-[24px] font-bold leading-[32px] "
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Foire aux questions
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="testimonial"
                 smooth={true}
                 duration={500}
@@ -131,6 +119,19 @@ const Navbar: React.FC = () => {
                 Témoignages
               </Link>
             </li>
+            <li>
+              <Link
+                to="faq"
+                smooth={true}
+                duration={500}
+                offset={-80}
+                className="text-[#8F8F8F] hover:text-[#FFFFFF] font-['RethinkSans-Bold'] text-[24px] font-bold leading-[32px] "
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Foire aux questions
+              </Link>
+            </li>
+
             <li>
               <Link
                 to="#contact-us"
