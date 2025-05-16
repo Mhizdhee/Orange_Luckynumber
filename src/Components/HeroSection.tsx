@@ -329,41 +329,37 @@ const HeroSection: React.FC = () => {
   // }, [isLoading, data]);
 
   useEffect(() => {
-    if (isLoading) return; // wait for loading to finish
+    if (isLoading) return;
 
-    console.log("API response data:", data);
-
-    if (!data || !Array.isArray(data.results) || data.results.length === 0) {
-      console.warn("No data or empty results");
+    const results = data?.results?.[0]?.drawResults;
+    if (!Array.isArray(results) || results.length === 0) {
+      console.warn("No draw results available");
       return;
     }
 
-    const drawResults = data.results[0].drawResults;
+    const orangeServices = [
+      "Lucky Number MAX",
+      "Lucky Number Eco",
+      "Lucky Number Premium",
+    ];
 
-    if (!Array.isArray(drawResults)) {
-      console.warn("drawResults is not an array or missing");
-      return;
-    }
-
-    const luckyNumberMax = drawResults.find(
-      (result) => result.serviceName === "Lucky Number MAX"
+    const selectedResult = results.find((r) =>
+      orangeServices.includes(r.serviceName)
     );
 
-    if (!luckyNumberMax || !luckyNumberMax.winningNumber) {
+    if (!selectedResult || !selectedResult.winningNumber) {
       const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
       setAnimatedNumbers(fallbackNumber);
       setIsAnimating(true);
       return;
     }
 
-    const formattedNumber = ("07" + luckyNumberMax.winningNumber).split("");
+    const formattedNumber = ("07" + selectedResult.winningNumber).split("");
     setTimeout(() => {
       setAnimatedNumbers(formattedNumber);
       setTimeout(() => setIsAnimating(true), 100);
     }, 600);
   }, [isLoading, data]);
-
-  console.log("API response data:", data);
 
   return (
     <>
