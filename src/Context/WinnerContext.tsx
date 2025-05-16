@@ -40,7 +40,6 @@ export const WinnerProvider: React.FC<{ children: React.ReactNode }> = ({
       revalidateOnFocus: false,
     }
   );
-  console.log("Fetching winners from:", `${baseUrl}/LN/fetch_winners.ashx`);
 
   return (
     <WinnerContext.Provider value={{ data, isLoading, error }}>
