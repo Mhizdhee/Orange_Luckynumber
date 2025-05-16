@@ -25,7 +25,7 @@ interface WinnerContextType {
 const WinnerContext = createContext<WinnerContextType | undefined>(undefined);
 
 // ✅ Use environment-based base URL
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+// const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
