@@ -10,7 +10,7 @@ import { useWinner } from "../Context/WinnerContext";
 
 const WinningNumbersPage: React.FC = () => {
   const navigate = useNavigate();
-  const { data, isLoading, error } = useWinner();
+  const { data } = useWinner();
   const [drawData, setDrawData] = useState<
     {
       service: string;

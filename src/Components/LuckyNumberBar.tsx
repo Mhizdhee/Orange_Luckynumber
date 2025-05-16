@@ -15,8 +15,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
   const [animatedNumbers, setAnimatedNumbers] = useState<string[]>(
     Array(10).fill("0")
   );
-  const { data, isLoading, error } = useWinner();
-
+  const { data, isLoading } = useWinner();
   // Scroll observer for visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,6 +60,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
       const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
       setAnimatedNumbers(fallbackNumber);
       setIsAnimating(true);
+      console.log(isAnimating);
       return;
     }
 

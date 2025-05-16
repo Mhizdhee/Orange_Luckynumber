@@ -9,12 +9,13 @@ import { useWinner } from "../Context/WinnerContext";
 
 const HeroSection: React.FC = () => {
   const [phone, setPhone] = useState("");
-  const { data, isLoading, error } = useWinner();
+  const { data, isLoading } = useWinner();
   const [isAnimating, setIsAnimating] = useState(false);
   const [animatedNumbers, setAnimatedNumbers] = useState<string[]>(
     Array(10).fill("0")
   );
 
+  console.log(isAnimating);
   useEffect(() => {
     if (!isLoading) return;
 
