@@ -24,18 +24,23 @@ interface WinnerContextType {
 
 const WinnerContext = createContext<WinnerContextType | undefined>(undefined);
 
+// ✅ Use environment-based base URL
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 export const WinnerProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { data, error, isLoading } = useSWR<ApiResponse>(
-    "/api/LN/fetch_winners.ashx",
+    // "/api/LN/fetch_winners.ashx",
+    `${baseUrl}/LN/fetch_winners.ashx`,
     fetcher,
     {
       revalidateOnFocus: false,
     }
   );
+  console.log("Fetching winners from:", `${baseUrl}/LN/fetch_winners.ashx`);
 
   return (
     <WinnerContext.Provider value={{ data, isLoading, error }}>
