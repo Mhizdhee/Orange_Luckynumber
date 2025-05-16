@@ -51,33 +51,66 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     return () => clearInterval(animationInterval);
   }, [isLoading]);
 
+  // useEffect(() => {
+  //   if (isLoading) return;
+
+  //   const results = data?.results?.[0]?.drawResults;
+  //   if (!Array.isArray(results) || results.length === 0) {
+  //     console.warn("No draw results available");
+  //     return;
+  //   }
+
+  //   const orangeServices = [
+  //     "Lucky Number MAX",
+  //     "Lucky Number Eco",
+  //     "Lucky Number Premium",
+  //   ];
+
+  //   const selectedResult = results.find((r) =>
+  //     orangeServices.includes(r.serviceName)
+  //   );
+
+  //   if (!selectedResult || !selectedResult.winningNumber) {
+  //     const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+  //     setAnimatedNumbers(fallbackNumber);
+  //     setIsAnimating(true);
+  //     return;
+  //   }
+
+  //   const formattedNumber = ("07" + selectedResult.winningNumber).split("");
+  //   setTimeout(() => {
+  //     setAnimatedNumbers(formattedNumber);
+  //     setTimeout(() => setIsAnimating(true), 100);
+  //   }, 600);
+  // }, [isLoading, data]);
+
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading || !data) return;
 
     const results = data?.results?.[0]?.drawResults;
-    if (!Array.isArray(results) || results.length === 0) {
+    if (!Array.isArray(results)) {
       console.warn("No draw results available");
       return;
     }
 
+    // Only consider Orange services
     const orangeServices = [
       "Lucky Number MAX",
       "Lucky Number Eco",
       "Lucky Number Premium",
     ];
-
-    const selectedResult = results.find((r) =>
-      orangeServices.includes(r.serviceName)
+    const orangeResult = results.find((result) =>
+      orangeServices.includes(result.serviceName)
     );
 
-    if (!selectedResult || !selectedResult.winningNumber) {
+    if (!orangeResult || !orangeResult.winningNumber) {
       const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
       setAnimatedNumbers(fallbackNumber);
       setIsAnimating(true);
       return;
     }
 
-    const formattedNumber = ("07" + selectedResult.winningNumber).split("");
+    const formattedNumber = ("07" + orangeResult.winningNumber).split("");
     setTimeout(() => {
       setAnimatedNumbers(formattedNumber);
       setTimeout(() => setIsAnimating(true), 100);
