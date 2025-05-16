@@ -33,7 +33,13 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     if (isLoading || !data) return;
 
-    const luckyNumberMax = data.results[0]?.drawResults.find(
+    const services = [
+      "Lucky Number MAX",
+      "Lucky Number Eco",
+      "Lucky Number Premium",
+    ];
+
+    const luckyNumberMax = data?.results[0]?.drawResults?.find(
       (result) => result.serviceName === "Lucky Number MAX"
     );
 
