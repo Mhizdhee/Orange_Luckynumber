@@ -49,10 +49,46 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     return () => clearInterval(animationInterval);
   }, [isLoading]);
 
-  useEffect(() => {
-    if (isLoading || !data) return;
+  // useEffect(() => {
+  //   if (isLoading || !data) return;
 
-    const luckyNumberMax = data?.results[0]?.drawResults?.find(
+  //   const luckyNumberMax = data?.results[0]?.drawResults?.find(
+  //     (result) => result.serviceName === "Lucky Number MAX"
+  //   );
+
+  //   if (!luckyNumberMax || !luckyNumberMax.winningNumber) {
+  //     const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+  //     setAnimatedNumbers(fallbackNumber);
+  //     setIsAnimating(true);
+  //     console.log(isAnimating);
+  //     return;
+  //   }
+
+  //   const formattedNumber = ("07" + luckyNumberMax.winningNumber).split("");
+  //   setTimeout(() => {
+  //     setAnimatedNumbers(formattedNumber);
+  //     setTimeout(() => setIsAnimating(true), 100);
+  //   }, 600);
+  // }, [isLoading, data]);
+
+  useEffect(() => {
+    if (isLoading) return; // wait for loading to finish
+
+    console.log("API response data:", data);
+
+    if (!data || !Array.isArray(data.results) || data.results.length === 0) {
+      console.warn("No data or empty results");
+      return;
+    }
+
+    const drawResults = data.results[0].drawResults;
+
+    if (!Array.isArray(drawResults)) {
+      console.warn("drawResults is not an array or missing");
+      return;
+    }
+
+    const luckyNumberMax = drawResults.find(
       (result) => result.serviceName === "Lucky Number MAX"
     );
 
@@ -60,7 +96,6 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
       const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
       setAnimatedNumbers(fallbackNumber);
       setIsAnimating(true);
-      console.log(isAnimating);
       return;
     }
 
