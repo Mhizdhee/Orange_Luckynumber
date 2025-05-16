@@ -51,9 +51,9 @@ const Navbar: React.FC = () => {
                 Témoignages
               </Link>
             </li>
-          </ul>
+            {/* </ul> */}
 
-          <ul className="flex items-center gap-10 cursor-pointer">
+            {/* <ul className="flex items-center gap-10 cursor-pointer"> */}
             <li>
               <Link
                 to="faq"

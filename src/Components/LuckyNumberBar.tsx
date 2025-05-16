@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NumberImg from "../assets/Images/BackgroundDis.png";
-// import ConfettiLeft from "../assets/Images/LeftConfetti.png";
-// import ConfettiRight from "../assets/Images/RightConfetti.png";
 import Confettis from "../assets/Images/confettis.png";
 import MobileConfettis from "../assets/Images/mobile-confettis.png";
 import { motion } from "framer-motion";
+import { useWinner } from "../Context/WinnerContext";
 
 interface LuckyNumberBarProps {
   triggerRef: React.RefObject<HTMLElement | null>;
@@ -12,10 +11,11 @@ interface LuckyNumberBarProps {
 
 const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
   const [showBar, setShowBar] = useState(false);
-
+  const [isAnimating, setIsAnimating] = useState(false);
   const [animatedNumbers, setAnimatedNumbers] = useState<string[]>(
     Array(10).fill("0")
   );
+  const { data, isLoading, error } = useWinner();
 
   // Scroll observer for visibility
   useEffect(() => {
@@ -37,116 +37,41 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
   }, [triggerRef]);
 
   useEffect(() => {
-    // Fixed prefix
-    const prefix = ["0", "7"];
+    if (!isLoading) return;
 
-    // Fixed placeholders for 'X'
-    const middle = ["X", "X"];
+    const animationInterval = setInterval(() => {
+      const randomDigits = Array.from({ length: 6 }, () =>
+        Math.floor(Math.random() * 10).toString()
+      );
+      const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+      setAnimatedNumbers(randomNumber);
+    }, 100);
 
-    // Generate 6 random digits
-    const suffixDigits = Array.from({ length: 6 }, () =>
-      Math.floor(Math.random() * 10)
+    return () => clearInterval(animationInterval);
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (isLoading || !data) return;
+
+    const luckyNumberMax = data.results[0]?.drawResults.find(
+      (result) => result.serviceName === "Lucky Number MAX"
     );
 
-    let frame = 0;
-    const maxFrames = 40;
+    if (!luckyNumberMax || !luckyNumberMax.winningNumber) {
+      const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+      setAnimatedNumbers(fallbackNumber);
+      setIsAnimating(true);
+      return;
+    }
 
-    const interval = setInterval(() => {
-      setAnimatedNumbers((_prev) =>
-        prefix.concat(
-          middle,
-          suffixDigits.map((digit, _i) => {
-            if (frame < maxFrames) {
-              return Math.floor(Math.random() * 10).toString();
-            } else {
-              return digit.toString();
-            }
-          })
-        )
-      );
-      frame++;
-      if (frame > maxFrames) clearInterval(interval);
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
-
+    const formattedNumber = ("07" + luckyNumberMax.winningNumber).split("");
+    setTimeout(() => {
+      setAnimatedNumbers(formattedNumber);
+      setTimeout(() => setIsAnimating(true), 100);
+    }, 600);
+  }, [isLoading, data]);
   return (
     <>
-      {/* {showBar && (
-        <div className="fixed top-13 w-full  overflow-hidden z-50 bg-[#252424] py-3 lg:py-4">
-          <div className="lg:flex lg:items-center lg:justify-center lg:gap-19 mx-4 xl:mx-0  ">
-            <img
-              src={Confettis}
-              alt="left"
-              className="hidden lg:block relative "
-            />
-
-            <img
-              src={MobileConfettis}
-              alt="left"
-              className="lg:hidden block relative "
-            />
-
-            <div className="absolute top-0 left-0 flex flex-col lg:flex-row items-center  gap-6">
-              <div
-                className="bg-[#3F3F3F] lg:w-auto w-[281px] h-[56px] flex items-center justify-between gap-4 text-[#FFFFFF]  rounded-[12px] border py-2   px-4 border-[var( --border-gradient)]"
-                style={{
-                  border: "1px solid transparent",
-                  borderImage: "var(--border-gradient)",
-                }}
-              >
-                <div className="w-[6px] h-[6px] lg:w-2 lg:h-2  bg-[#8F8F8F] rounded-full"></div>
-                <p className="text-[13px] lg:text-[16px] lg:whitespace-nowrap font-[Inter] font-normal leading-[18px] lg:leading-[24px]">
-                  Numéro d’Or du jour
-                </p>
-                <div className="w-[6px] h-[6px] lg:w-2 lg:h-2  bg-[#8F8F8F] rounded-full"></div>
-              </div>
-              rolling numbers)
-              <div className="relative w-[281px] h-[60px] lg:w-[212px] lg:h-[56px]">
-                <img
-                  src={NumberImg}
-                  alt="number-bg"
-                  className="w-full h-full object-fit"
-                />
-                <div className="absolute inset-0 flex items-center justify-center gap-0 px-8 lg:px-4">
-                  {animatedNumbers.map((num, index) =>
-                    num === "X" ? (
-                      <div
-                        key={index}
-                        className=" flex items-center justify-center bg-gradient-to-b from-white to-[#999999] text-transparent bg-clip-text font-bold font-[Inter] text-[21px] leading-[22px] "
-                      >
-                        X
-                      </div>
-                    ) : (
-                      <div
-                        key={index}
-                        className="relative   w-[30px]  h-[50px] overflow-hidden"
-                      >
-                        <motion.div
-                          initial={{ y: 0 }}
-                          animate={{ y: `-${Number(num) * 50}px` }}
-                          transition={{ duration: 1.2, ease: "easeOut" }}
-                        >
-                          {[...Array(10)].map((_, i) => (
-                            <div
-                              key={i}
-                              className="h-[50px] flex items-center justify-center bg-gradient-to-b from-white to-[#999999] text-transparent bg-clip-text font-bold font-[Inter] text-[21px] leading-[22px]"
-                            >
-                              {i}
-                            </div>
-                          ))}
-                        </motion.div>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )} */}
-
       {showBar && (
         <div className="fixed top-13 w-full z-50">
           <div className="relative w-full overflow-hidden">
@@ -164,7 +89,6 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
 
             {/* Overlay Content */}
             <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center gap-6 ">
-              {/* Left pill box */}
               <div
                 className="bg-[#3F3F3F] w-[281px] md:w-auto h-[56px]  flex items-center justify-between gap-4 text-white rounded-[12px] border px-4 md:py-3 py-2"
                 style={{
@@ -188,7 +112,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
                 />
                 <div className="absolute inset-0 flex items-center justify-center gap-1 px-8  md:px-4">
                   {animatedNumbers.map((num, index) =>
-                    num === "X" ? (
+                    num === "x" || num === "X" ? (
                       <div
                         key={index}
                         className="text-[21px] leading-[22px] font-bold font-[Inter] text-transparent bg-gradient-to-b from-white to-[#999999] bg-clip-text"

@@ -5,48 +5,50 @@ import MobileBackground from "../assets/Images/mobilebg-img .png";
 import NumberImg from "../assets/Images/BackgroundDis.png";
 import { motion } from "framer-motion";
 import WinningNumbersSection from "./WinninNumbersSection";
+import { useWinner } from "../Context/WinnerContext";
 
 const HeroSection: React.FC = () => {
   const [phone, setPhone] = useState("");
-
+  const { data, isLoading, error } = useWinner();
+  const [isAnimating, setIsAnimating] = useState(false);
   const [animatedNumbers, setAnimatedNumbers] = useState<string[]>(
     Array(10).fill("0")
   );
 
   useEffect(() => {
-    // Fixed prefix
-    const prefix = ["0", "7"];
+    if (!isLoading) return;
 
-    // Fixed placeholders for 'X'
-    const middle = ["X", "X"];
+    const animationInterval = setInterval(() => {
+      const randomDigits = Array.from({ length: 6 }, () =>
+        Math.floor(Math.random() * 10).toString()
+      );
+      const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+      setAnimatedNumbers(randomNumber);
+    }, 100);
 
-    // Generate 6 random digits
-    const suffixDigits = Array.from({ length: 6 }, () =>
-      Math.floor(Math.random() * 10)
+    return () => clearInterval(animationInterval);
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (isLoading || !data) return;
+
+    const luckyNumberMax = data.results[0]?.drawResults.find(
+      (result) => result.serviceName === "Lucky Number MAX"
     );
 
-    let frame = 0;
-    const maxFrames = 40;
+    if (!luckyNumberMax || !luckyNumberMax.winningNumber) {
+      const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+      setAnimatedNumbers(fallbackNumber);
+      setIsAnimating(true);
+      return;
+    }
 
-    const interval = setInterval(() => {
-      setAnimatedNumbers((_prev) =>
-        prefix.concat(
-          middle,
-          suffixDigits.map((digit, _i) => {
-            if (frame < maxFrames) {
-              return Math.floor(Math.random() * 10).toString();
-            } else {
-              return digit.toString();
-            }
-          })
-        )
-      );
-      frame++;
-      if (frame > maxFrames) clearInterval(interval);
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
+    const formattedNumber = ("07" + luckyNumberMax.winningNumber).split("");
+    setTimeout(() => {
+      setAnimatedNumbers(formattedNumber);
+      setTimeout(() => setIsAnimating(true), 100);
+    }, 600);
+  }, [isLoading, data]);
 
   return (
     <>
@@ -111,10 +113,10 @@ const HeroSection: React.FC = () => {
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       {animatedNumbers.map((num, index) =>
-                        num === "X" ? (
+                        num === "x" || num === "X" ? (
                           <div
                             key={index}
-                            className=" flex items-center justify-center bg-gradient-to-b from-white to-[#999999] text-transparent bg-clip-text font-bold font-[Inter] text-[44px] leading-[44px] "
+                            className="flex items-center justify-center bg-gradient-to-b from-white to-[#999999] text-transparent bg-clip-text font-bold font-[Inter] text-[44px] leading-[44px] w-[40px] h-[60px]"
                           >
                             X
                           </div>
@@ -210,7 +212,7 @@ const HeroSection: React.FC = () => {
                     />
                     <div className="absolute inset-0 flex items-center justify-center px-6">
                       {animatedNumbers.map((num, index) =>
-                        num === "X" ? (
+                        num === "x" || num === "X" ? (
                           <div
                             key={index}
                             className=" flex items-center justify-center bg-gradient-to-b from-white to-[#999999] text-transparent bg-clip-text font-bold font-[Inter] text-[35px] leading-[35px] lg:text-[44px] lg:leading-[44px] "
@@ -258,5 +260,4 @@ const HeroSection: React.FC = () => {
     </>
   );
 };
-
 export default HeroSection;
