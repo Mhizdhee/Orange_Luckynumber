@@ -52,7 +52,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
   useEffect(() => {
     if (isLoading || !data) return;
 
-    const luckyNumberMax = data.results[0]?.drawResults.find(
+    const luckyNumberMax = data?.results[0]?.drawResults?.find(
       (result) => result.serviceName === "Lucky Number MAX"
     );
 
