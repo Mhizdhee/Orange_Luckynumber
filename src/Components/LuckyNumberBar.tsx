@@ -11,12 +11,12 @@ interface LuckyNumberBarProps {
 
 const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
   const [showBar, setShowBar] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [, setIsAnimating] = useState(false);
   const [animatedNumbers, setAnimatedNumbers] = useState<string[]>(
     Array(10).fill("0")
   );
   const { data, isLoading } = useWinner();
-  console.log(isAnimating);
+  // console.log(isAnimating);
 
   // Scroll observer for visibility
   useEffect(() => {
