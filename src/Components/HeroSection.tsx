@@ -281,12 +281,13 @@ import { useWinner } from "../Context/WinnerContext";
 const HeroSection: React.FC = () => {
   const [phone, setPhone] = useState("");
   const { data, isLoading } = useWinner();
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [, setIsAnimating] = useState(false);
   const [animatedNumbers, setAnimatedNumbers] = useState<string[]>(
     Array(10).fill("0")
   );
+  const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false);
 
-  console.log(isAnimating);
+  // console.log(isAnimating);
   useEffect(() => {
     if (!isLoading) return;
 
@@ -525,13 +526,16 @@ const HeroSection: React.FC = () => {
                 </p>
               </div>
               <div className="mt-8 flex items-center gap-2">
-                <input
+                {/* <input
                   type="text"
                   placeholder="0123456789"
                   className="hidden lg:flex bg-[#FFFFFF] py-[10px] px-4 outline-none w-full"
-                />
+                /> */}
 
-                <button className="w-[327px] mx-auto md:mx-auto lg:mx-0 md:w-[70%] lg:w-1/2 bg-[#FF7900] hover:bg-[#101010] py-[10px] px-4 text-[#101010] hover:text-[#FFFFFF] text-[16px] font-[Inter] font-medium leading-[24px]">
+                <button
+                  onClick={() => setIsSubscribeModalOpen(true)}
+                  className="w-[327px] mx-auto md:mx-auto lg:mx-0 md:w-[70%] lg:w-1/2 bg-[#FF7900] hover:bg-[#101010] py-[10px] px-4 text-[#101010] hover:text-[#FFFFFF] text-[16px] font-[Inter] font-medium leading-[24px]"
+                >
                   S'abonner
                 </button>
               </div>
@@ -603,6 +607,51 @@ const HeroSection: React.FC = () => {
           </div>
         </section>
         <WinningNumbersSection />
+        {isSubscribeModalOpen && (
+          <div className="lg:hidden  fixed inset-0 bg-[#8F8F8F01] bg-opacity-60 z-50 flex items-center justify-center">
+            <div className="bg-gradient-to-b from-white to-[#999999] p-6 mx-4 rounded-lg w-full max-w-md relative">
+              <button
+                onClick={() => setIsSubscribeModalOpen(false)}
+                className="absolute top-2 right-3 text-xl leading-[22px] font-bold font-[Inter]"
+              >
+                ×
+              </button>
+              <h2 className="text-[28px] text-center font-bold font-['RethinkSans-Bold'] my-4">
+                Comment s'abonner ?
+              </h2>
+              <p className="mb-4 text-center text-[18px] font-medium font-[Inter] leading-[18px]">
+                Choisissez un pack pour envoyer un mot-clé au 7717
+              </p>
+
+              <div className="space-y-3">
+                <a
+                  href="sms:7717?&body=NO1"
+                  className="block bg-[#FF7900]  px-4 py-3.5 rounded-[12px] text-center"
+                >
+                  <span className="bg-gradient-to-b from-white to-[#999999] bg-clip-text text-transparent text-[18px] font-[Inter] font-medium leading-[24px] ">
+                    "NO1" - Pack 50F
+                  </span>
+                </a>
+                <a
+                  href="sms:7717?&body=NO2"
+                  className="block bg-[#FF7900]  px-4 py-3.5 rounded-[12px] text-center"
+                >
+                  <span className="bg-gradient-to-b from-[#999999] to-white bg-clip-text text-transparent text-[18px] font-[Inter] font-medium leading-[24px] ">
+                    "NO2" - Pack 100F
+                  </span>
+                </a>
+                <a
+                  href="sms:7717?&body=NO3"
+                  className="block bg-[#FF7900]  px-4 py-3.5 rounded-[12px] text-center"
+                >
+                  <span className="bg-gradient-to-b from-white to-[#999999] bg-clip-text text-transparent text-[18px] font-[Inter] font-medium leading-[24px] ">
+                    "NO3" - Pack 250F
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const TermsAndConditions: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="px-4 py-8 max-w-4xl mx-auto text-justify text-sm md:text-base leading-6">
       <div className="border flex flex-col items-center ">
@@ -725,6 +728,15 @@ const TermsAndConditions: React.FC = () => {
       </div>
       <div className="mt-30 flex items-center justify-end">
         <p className="italic">Fait à Abidjan, le 26 avril 2025</p>
+      </div>
+
+      <div className="mt-10 text-center font-inria">
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-ffgray text-black px-6 py-2 rounded-md hover:underline transition font-inria cursor-pointer"
+        >
+          Retour
+        </button>
       </div>
     </div>
   );
