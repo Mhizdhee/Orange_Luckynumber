@@ -32,8 +32,7 @@ export const WinnerProvider: React.FC<{ children: React.ReactNode }> = ({
   const { data, error, isLoading } = useSWR<ApiResponse>(
     "https://api.ydplatform.com/LN/fetch_winners.ashx",
     // "/api/LN/fetch_winners.ashx",
-    // "/api/LN/fetch_winners",
-    // `${baseUrl}/LN/fetch_winners.ashx`,
+
     fetcher,
     {
       revalidateOnFocus: false,

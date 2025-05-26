@@ -110,9 +110,9 @@ const WinningNumbersPage: React.FC = () => {
                         <h5 className="text-[#8F8F8F] font-['RethinkSans-SemiBold'] font-semibold text-[16px] lg:text-[18px] leading-[26px]">
                           {item.number}
                         </h5>
-                        <p className="text-xs font-['RethinkSans-SemiBold'] font-semibold text-[#666]">
+                        {/* <p className="text-xs font-['RethinkSans-SemiBold'] font-semibold text-[#666]">
                           {item.service}
-                        </p>
+                        </p> */}
                       </li>
                     ))}
                   </ol>
