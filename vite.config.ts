@@ -11,7 +11,14 @@ export default defineConfig({
   //       target: "https://api.ydplatform.com",
   //       changeOrigin: true,
   //       rewrite: (path) => path.replace(/^\/api/, ""),
+  //       // rewrite: (path) => path.replace(/^\/api/, "/api"),
+  //     },
+  //     "/LN": {
+  //       target: "https://api.ydplatform.com",
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/LN/, "/LN"),
   //     },
   //   },
   // },
 });
+// uncomment winnerContext as well
