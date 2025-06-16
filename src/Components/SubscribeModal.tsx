@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { getToken, subscribeUser } from "../api/subscriptionApi";
+import { AxiosError } from "axios";
 
 type SubscribeModalProps = {
   onClose: () => void;
   msisdn: string;
 };
+
+interface ApiErrorResponse {
+  ResultCode: number;
+  Description: string;
+}
 
 const SubscribeModal: React.FC<SubscribeModalProps> = ({ onClose, msisdn }) => {
   const [loadingServiceId, setLoadingServiceId] = useState<number | null>(null);
@@ -47,9 +53,15 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ onClose, msisdn }) => {
       setTimeout(() => {
         setMessage(null);
       }, 1500);
-    } catch (error) {
+    } catch (err) {
+      const error = err as AxiosError<ApiErrorResponse>;
+
       console.error(" Error during subscription:", error);
-      setMessage({ text: " Subscription failed. Try again.", type: "error" });
+
+      const description =
+        error?.response?.data?.Description || "Subscription failed. Try again.";
+
+      setMessage({ text: description, type: "error" });
     } finally {
       setLoadingServiceId(null);
     }

@@ -98,6 +98,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
       "Lucky Number MAX",
       "Lucky Number Eco",
       "Lucky Number Premium",
+      "IC Orange Lucky Number Eco",
     ];
     const orangeResult = results.find((result) =>
       orangeServices.includes(result.serviceName)

@@ -28,6 +28,7 @@ const WinningNumbersSection: React.FC = () => {
       "Lucky Number MAX",
       "Lucky Number Eco",
       "Lucky Number Premium",
+      "IC Orange Lucky Number Eco",
     ];
 
     // const services = [
