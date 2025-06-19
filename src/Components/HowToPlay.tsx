@@ -45,7 +45,7 @@ const HowToPlay: React.FC = () => {
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col items-center text-left w-full max-w-[340px]">
+            {/* <div className="flex flex-col items-center text-left w-full max-w-[340px]">
               <img
                 src={Phone2}
                 alt="Step 2"
@@ -65,18 +65,18 @@ const HowToPlay: React.FC = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Step 3 */}
             <div className="flex flex-col items-center text-left w-full max-w-[340px]">
               <img
                 src={Phone3}
-                alt="Step 3"
+                alt="Step 2"
                 className="object-contain mx-auto mb-4"
               />
               <div className="flex items-center text-left gap-6">
                 <p className="text-[148px] font-[Bangers] font-normal leading-[108px] text-[#212121]">
-                  3
+                  2
                 </p>
                 <div className="flex flex-col max-w-[373px] text-left">
                   <p className="text-[18px] font-['RethinkSans-Bold'] leading-[26px] font-semibold text-[#FFFFFF]">
