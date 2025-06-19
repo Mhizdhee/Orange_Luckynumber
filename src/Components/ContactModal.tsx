@@ -34,7 +34,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
           formRef.current?.reset();
         },
         (error) => {
-          alert("Failed to send message. Please try again.");
+          console.log("Failed to send message. Please try again.");
           console.error(error);
         }
       )
@@ -121,7 +121,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             className="mt-4 w-full bg-[#FF7900] hover:bg-[#101010] font-[Inter] font-medium text-[16px] leading-[24px] text-[#101010] px-4 py-[10px] rounded-md hover:text-[#ffffff] transition cursor-pointer"
           >
             {isLoading ? (
-              <PulseLoader size={15} color="#171719" className="mx-auto" />
+              <PulseLoader size={15} color="white" className="mx-auto" />
             ) : (
               "Envoyez un message"
             )}
