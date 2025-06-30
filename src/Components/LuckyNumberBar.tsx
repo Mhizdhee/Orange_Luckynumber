@@ -37,20 +37,6 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     };
   }, [triggerRef]);
 
-  // useEffect(() => {
-  //   if (!isLoading) return;
-
-  //   const animationInterval = setInterval(() => {
-  //     const randomDigits = Array.from({ length: 6 }, () =>
-  //       Math.floor(Math.random() * 10).toString()
-  //     );
-  //     const randomNumber = ["0", "7", "X", "X", ...randomDigits];
-  //     setAnimatedNumbers(randomNumber);
-  //   }, 100);
-
-  //   return () => clearInterval(animationInterval);
-  // }, [isLoading]);
-
   useEffect(() => {
     if (isLoading && !data) {
       animationRef.current = setInterval(() => {
