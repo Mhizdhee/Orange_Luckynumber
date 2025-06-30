@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import HeroBg from "../assets/Images/heroimg.png";
 import Background from "../assets/Images/Background-img.png";
 import MobileBackground from "../assets/Images/mobilebg-img .png";
@@ -19,31 +19,57 @@ const HeroSection: React.FC = () => {
   const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const animationRef = useRef<NodeJS.Timeout | null>(null);
+
+  // useEffect(() => {
+  //   if (!isLoading) return;
+
+  //   const animationInterval = setInterval(() => {
+  //     const randomDigits = Array.from({ length: 6 }, () =>
+  //       Math.floor(Math.random() * 10).toString()
+  //     );
+  //     const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+  //     setAnimatedNumbers(randomNumber);
+  //   }, 100);
+
+  //   return () => clearInterval(animationInterval);
+  // }, [isLoading]);
 
   useEffect(() => {
-    if (!isLoading) return;
+    if (isLoading && !data) {
+      animationRef.current = setInterval(() => {
+        const randomDigits = Array.from({ length: 6 }, () =>
+          Math.floor(Math.random() * 10).toString()
+        );
+        const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+        setAnimatedNumbers(randomNumber);
+      }, 100);
+    }
 
-    const animationInterval = setInterval(() => {
-      const randomDigits = Array.from({ length: 6 }, () =>
-        Math.floor(Math.random() * 10).toString()
-      );
-      const randomNumber = ["0", "7", "X", "X", ...randomDigits];
-      setAnimatedNumbers(randomNumber);
-    }, 100);
-
-    return () => clearInterval(animationInterval);
-  }, [isLoading]);
+    return () => {
+      if (animationRef.current) {
+        clearInterval(animationRef.current);
+      }
+    };
+  }, [isLoading, data]);
 
   useEffect(() => {
     if (isLoading || !data) return;
 
+    //  Stop the animation immediately when data is ready
+    if (animationRef.current) {
+      clearInterval(animationRef.current);
+    }
+
     const results = data?.results?.[0]?.drawResults;
-    if (!Array.isArray(results)) {
-      console.warn("No draw results available");
+
+    if (!Array.isArray(results) || results.length === 0) {
+      const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+      setAnimatedNumbers(fallbackNumber);
+      setIsAnimating(true);
       return;
     }
 
-    // Only consider Orange services
     const orangeServices = [
       "Lucky Number MAX",
       "Lucky Number Eco",

@@ -36,6 +36,8 @@ export const WinnerProvider: React.FC<{ children: React.ReactNode }> = ({
     fetcher,
     {
       revalidateOnFocus: false,
+      revalidateOnMount: true,
+      revalidateIfStale: true,
     }
   );
 

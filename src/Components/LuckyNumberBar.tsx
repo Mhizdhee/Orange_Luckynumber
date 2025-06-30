@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NumberImg from "../assets/Images/BackgroundDis.png";
 import Confettis from "../assets/Images/confettis.png";
 import MobileConfettis from "../assets/Images/mobile-confettis.png";
@@ -16,7 +16,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     Array(10).fill("0")
   );
   const { data, isLoading } = useWinner();
-  // console.log(isAnimating);
+  const animationRef = useRef<NodeJS.Timeout | null>(null);
 
   // Scroll observer for visibility
   useEffect(() => {
@@ -37,59 +37,51 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     };
   }, [triggerRef]);
 
-  useEffect(() => {
-    if (!isLoading) return;
-
-    const animationInterval = setInterval(() => {
-      const randomDigits = Array.from({ length: 6 }, () =>
-        Math.floor(Math.random() * 10).toString()
-      );
-      const randomNumber = ["0", "7", "X", "X", ...randomDigits];
-      setAnimatedNumbers(randomNumber);
-    }, 100);
-
-    return () => clearInterval(animationInterval);
-  }, [isLoading]);
-
   // useEffect(() => {
-  //   if (isLoading) return;
+  //   if (!isLoading) return;
 
-  //   const results = data?.results?.[0]?.drawResults;
-  //   if (!Array.isArray(results) || results.length === 0) {
-  //     console.warn("No draw results available");
-  //     return;
-  //   }
+  //   const animationInterval = setInterval(() => {
+  //     const randomDigits = Array.from({ length: 6 }, () =>
+  //       Math.floor(Math.random() * 10).toString()
+  //     );
+  //     const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+  //     setAnimatedNumbers(randomNumber);
+  //   }, 100);
 
-  //   const orangeServices = [
-  //     "Lucky Number MAX",
-  //     "Lucky Number Eco",
-  //     "Lucky Number Premium",
-  //   ];
+  //   return () => clearInterval(animationInterval);
+  // }, [isLoading]);
 
-  //   const selectedResult = results.find((r) =>
-  //     orangeServices.includes(r.serviceName)
-  //   );
+  useEffect(() => {
+    if (isLoading && !data) {
+      animationRef.current = setInterval(() => {
+        const randomDigits = Array.from({ length: 6 }, () =>
+          Math.floor(Math.random() * 10).toString()
+        );
+        const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+        setAnimatedNumbers(randomNumber);
+      }, 100);
+    }
 
-  //   if (!selectedResult || !selectedResult.winningNumber) {
-  //     const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
-  //     setAnimatedNumbers(fallbackNumber);
-  //     setIsAnimating(true);
-  //     return;
-  //   }
-
-  //   const formattedNumber = ("07" + selectedResult.winningNumber).split("");
-  //   setTimeout(() => {
-  //     setAnimatedNumbers(formattedNumber);
-  //     setTimeout(() => setIsAnimating(true), 100);
-  //   }, 600);
-  // }, [isLoading, data]);
+    return () => {
+      if (animationRef.current) {
+        clearInterval(animationRef.current);
+      }
+    };
+  }, [isLoading, data]);
 
   useEffect(() => {
     if (isLoading || !data) return;
 
+    if (animationRef.current) {
+      clearInterval(animationRef.current);
+    }
+
     const results = data?.results?.[0]?.drawResults;
-    if (!Array.isArray(results)) {
-      console.warn("No draw results available");
+
+    if (!Array.isArray(results) || results.length === 0) {
+      const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+      setAnimatedNumbers(fallbackNumber);
+      setIsAnimating(true);
       return;
     }
 
