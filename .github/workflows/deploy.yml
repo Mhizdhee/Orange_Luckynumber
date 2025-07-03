@@ -30,7 +30,7 @@ jobs:
       - name: Configure SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.orange_ln_ic_key_ORANGE_LN_IC_FRONTEND }}" | tr -d '\r' > ~/.ssh/orange_ln_ic_key
+          echo "${{ secrets.DEPLOY_KEY_ORANGE_LN_IC_FRONTEND }}" | tr -d '\r' > ~/.ssh/orange_ln_ic_key
           chmod 600 ~/.ssh/orange_ln_ic_key
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
