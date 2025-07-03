@@ -1,4 +1,4 @@
-name: Deploy Orange_Lucky_NumberIC
+name: Deploy ORANGE_LN_IC_FRONTEND
 
 on:
   push:
@@ -6,14 +6,14 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
@@ -21,11 +21,42 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build the app
+      - name: Build the project
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Check Build Output
+        run: ls -lah ./dist #  Ensure dist was built successfully
+
+      - name: Configure SSH Key
+        run: |
+          - mkdir -p ~/.ssh
+          echo "${{ secrets.orange_ln_ic_key_ORANGE_LN_IC_FRONTEND }}" | tr -d '\r' > ~/.ssh/orange_ln_ic_key
+          chmod 600 ~/.ssh/orange_ln_ic_key
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Securely Copy Files to Server
+        run: |
+          ssh -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo mkdir -p ${{ secrets.WORK_DIR }}/dist && sudo chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} ${{ secrets.WORK_DIR }}/dist"
+          rsync -e "ssh -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no" -avz --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/dist
+
+      - name: Deploy on Server
+        uses: appleboy/ssh-action@master
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./build
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: 22
+          script: |
+            echo "🔍 Checking deployed files..."
+            ls -lah ${{ secrets.WORK_DIR }}/dist  #  Verify dist exists on server
+
+            echo "🛠 Setting correct permissions..."
+            sudo chown -R www-data:www-data ${{ secrets.WORK_DIR }}
+            sudo chmod -R 755 ${{ secrets.WORK_DIR }}
+
+            echo "Restarting Nginx..."
+            sudo systemctl restart nginx
+
+            echo "📝 Checking Nginx logs for issues..."
+            sudo tail -n 20 /var/log/nginx/error.log  #  Debugging info
+
+            echo "🚀 Deployment successful!"
