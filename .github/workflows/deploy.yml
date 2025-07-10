@@ -36,7 +36,7 @@ jobs:
 
       - name: Securely Copy Files to Server
         run: |
-          ssh -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo mkdir -p ${{ secrets.WORK_DIR }}/dist && sudo chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} ${{ secrets.WORK_DIR }}/dist"
+          ssh -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.WORK_DIR }}/dist && chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} ${{ secrets.WORK_DIR }}/dist"
           rsync -e "ssh -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no" -avz --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/dist
 
       - name: Deploy on Server
@@ -50,14 +50,14 @@ jobs:
             echo "🔍 Checking deployed files..."
             ls -lah ${{ secrets.WORK_DIR }}/dist
 
-            echo "🛠 Setting correct permissions..."
-            sudo chown -R www-data:www-data ${{ secrets.WORK_DIR }}
-            sudo chmod -R 755 ${{ secrets.WORK_DIR }}
+            echo "🛠 Setting correct permissions (non-sudo)..."
+            chown -R $USER:$USER ${{ secrets.WORK_DIR }} || echo "No permission to chown"
+            chmod -R 755 ${{ secrets.WORK_DIR }} || echo "No permission to chmod"
 
-            echo "🔄 Restarting Nginx..."
-            sudo systemctl restart nginx
+            echo "🔄 Restarting Nginx (may fail without sudo)..."
+            systemctl restart nginx || echo "⚠️ Could not restart nginx"
 
-            echo "📜 Checking Nginx logs for issues..."
-            sudo tail -n 20 /var/log/nginx/error.log
+            echo "📜 Checking Nginx logs (may fail without sudo)..."
+            tail -n 20 /var/log/nginx/error.log || echo "⚠️ Could not read nginx logs"
 
-            echo "🚀 Deployment successful!"
+            echo "🚀 Deployment completed!"
