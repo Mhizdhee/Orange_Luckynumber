@@ -24,10 +24,10 @@ const Footer: React.FC = () => {
             <div className="flex gap-4">
               <img
                 src={OrangeLogo}
-                alt="Logo 1"
+                alt="orange logo"
                 className="border-r border-r-[#8F8F8F] pr-3 h-10"
               />
-              <img src={LuckyLogo} alt="Logo 2" className="h-10" />
+              <img src={LuckyLogo} alt="Lucky number logo" className="h-10" />
             </div>
 
             <div className="flex flex-col lg:flex-row gap-6">
