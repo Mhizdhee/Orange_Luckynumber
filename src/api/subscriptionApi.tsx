@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const API_BASE = "https://api.ydplatform.com/api";
-const API_BASE = "/api/api";
+const API_BASE = "https://api.ydplatform.com/api";
+// const API_BASE = "/api/api";
 
 const PASSWORD = import.meta.env.VITE_YD_API_PASSWORD;
 

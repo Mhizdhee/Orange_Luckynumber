@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Navbar from "../Components/Navbar";
 import HeroSection from "../Components/HeroSection";
 import HowToPlay from "../Components/HowToPlay";
-import Testimonial from "../Components/Testimonial";
+// import Testimonial from "../Components/Testimonial";
 import Faq from "../Components/FAQSection";
 import Footer from "../Components/Footer";
 import Socials from "../Components/Socials";
@@ -21,7 +21,7 @@ const LandingPage: React.FC = () => {
         <HeroSection />
         <div ref={howToPlayRef}>
           <HowToPlay />
-          <Testimonial />
+          {/* <Testimonial /> */}
           <Faq />
           <Footer />
           <Socials />
