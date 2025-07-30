@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
 
@@ -36,8 +36,8 @@ jobs:
 
       - name: Securely Copy Files to Server
         run: |
-          ssh -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.WORK_DIR }}/dist && chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} ${{ secrets.WORK_DIR }}/dist"
-          rsync -e "ssh -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no" -avz --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/dist
+          ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.WORK_DIR }}/dist && chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} ${{ secrets.WORK_DIR }}/dist"
+          rsync -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/orange_ln_ic_key -o StrictHostKeyChecking=no" -avz --delete ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/dist
 
       - name: Deploy on Server
         uses: appleboy/ssh-action@master
@@ -45,7 +45,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.DEPLOY_KEY_ORANGE }}
-          port: 22
+          port: ${{ secrets.SSH_PORT }}
           script: |
             echo "🔍 Checking deployed files..."
             ls -lah ${{ secrets.WORK_DIR }}/dist
