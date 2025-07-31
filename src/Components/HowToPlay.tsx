@@ -1,6 +1,7 @@
 import React from "react";
 import Phone1 from "../assets/Images/Phone.png";
 // import Phone2 from "../assets/Images/Phone2.png";
+// import Phone2 from "../assets/Images/Phone2.png";
 import Phone3 from "../assets/Images/Phone3.png";
 
 const HowToPlay: React.FC = () => {
@@ -22,7 +23,6 @@ const HowToPlay: React.FC = () => {
             </p>
           </div>
 
-          {/* Steps */}
           <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-10 mt-12">
             {/* Step 1 */}
 

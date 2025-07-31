@@ -7,7 +7,6 @@ import Instagram from "../assets/Icons/instagram.svg";
 const Socials: React.FC = () => {
   return (
     <>
-      {/* Bottom Footer */}
       <div className="flex flex-col py-6 px-6 bg-[#242424] lg:flex-row lg:px-30  justify-between items-center gap-6">
         <div className="flex gap-6">
           <a

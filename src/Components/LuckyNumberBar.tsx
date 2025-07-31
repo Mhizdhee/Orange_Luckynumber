@@ -101,7 +101,6 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
       {showBar && (
         <div className="fixed top-13 w-full z-50">
           <div className="relative w-full overflow-hidden">
-            {/* Background Image */}
             <img
               src={Confettis}
               alt="desktop-bg"
