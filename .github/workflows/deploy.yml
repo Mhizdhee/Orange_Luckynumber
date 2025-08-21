@@ -21,6 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Creating .env file
+        run: |
+          echo "VITE_YD_API_PASSWORD=${{ secrets.YD_API_PASSWORD }}" > .env
+
       - name: Build the project
         run: npm run build
 
