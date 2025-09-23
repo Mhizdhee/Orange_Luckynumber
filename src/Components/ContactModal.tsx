@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import emailjs from "emailjs-com";
+import React, { useState } from "react";
+import axios from "axios";
 import { PulseLoader } from "react-spinners";
 
 type ContactModalProps = {
@@ -8,40 +8,51 @@ type ContactModalProps = {
 };
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
-  const formRef = useRef<HTMLFormElement>(null);
+  // const formRef = useRef<HTMLFormElement>(null);
   const [showPopup, setShowPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
 
-  if (!isOpen) return null;
+  enum WebsiteUrl {
+    Orange_IC = "https://orglnic.ydaplatform.com/",
+  }
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formRef.current) return;
+    const formData = new FormData(e.target as HTMLFormElement);
+    const phoneNumber = formData.get("phoneNumber") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
 
     setIsLoading(true);
 
-    emailjs
-      .sendForm(
-        "service_y6yfmph",
-        "template_gujegaj",
-        formRef.current,
-        "qX_WDa3ywWNNRtVRC"
-      )
-      .then(
-        () => {
-          setShowPopup(true);
-          formRef.current?.reset();
-        },
-        (error) => {
-          console.log("Failed to send message. Please try again.");
-          console.error(error);
+    try {
+      const response = await axios.post(
+        "https://api.ydplatform.com:5542/contact-us",
+        {
+          // const response = await axios.post("api/contact-us", {
+          // await axios.post("api/contact-us", {
+          phoneNumber,
+          email,
+          message,
+          websiteUrl: WebsiteUrl.Orange_IC,
         }
-      )
-      .finally(() => {
-        setIsLoading(false);
-      });
+      );
+
+      setResponseMessage(response.data.message);
+      setShowPopup(true);
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      setResponseMessage("Failed to send message. Please try again.");
+      setShowPopup(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-[#10101090] bg-opacity-50 z-70 flex items-center justify-center">
@@ -58,7 +69,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
           Contactez-nous
         </h2>
 
-        <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="lg:flex lg:gap-6 lg:items-center w-full">
             <div className="mb-4 lg:mb-0">
               <label className="block font-[Inter] text-[14px] lg:text-[16px] leading-[22px] lg:leading-[24px] text-[#101010] font-medium mb-[6px]">
@@ -66,7 +77,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               </label>
               <input
                 type="text"
-                name="name"
+                name="phoneNumber"
                 required
                 className="w-full border border-[#E0E0E0] font-[Inter] font-normal text-[14px] lg:text-[16px] leading-[22px] lg:leading-[24px] placeholder:text-[#CCCCCC] outline-none  px-4 py-[10px]"
                 placeholder=" Nom"
@@ -134,20 +145,42 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
       {showPopup && (
         <div className="fixed top-0 left-0 w-full h-full bg-[#000000]/50 bg-opacity-10  flex items-center justify-center z-50">
           <div className="bg-white text-black mx-4 p-6 w-[400px] h-[250px] flex flex-col items-center justify-center rounded shadow-xl text-center">
-            <div className="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center mb-4">
-              <svg
-                className="w-8 h-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={3}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
+            <div
+              className={`w-12 h-12 rounded-full ${
+                responseMessage?.toLowerCase().includes("failed")
+                  ? "bg-red-600"
+                  : "bg-green-600"
+              } flex items-center justify-center mb-4`}
+            >
+              {responseMessage?.toLowerCase().includes("failed") ? (
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              )}
             </div>
             <p className="font-[AsapCondensed-Bold]  font-bold text-[24px] leading-[32px] text-[#1C1C1C]">
               Votre message a été envoyé avec succès !
