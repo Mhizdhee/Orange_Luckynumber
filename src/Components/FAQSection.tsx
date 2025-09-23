@@ -153,6 +153,7 @@ const FAQSection = () => {
             onClick={goToPrev}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-[#EEEEEE] text-black hover:bg-[#FF7900] disabled:opacity-50 cursor-pointer"
             disabled={currentPage === 0}
+            aria-label="Go to prev page"
           >
             <ChevronLeft />
           </button>
@@ -164,6 +165,8 @@ const FAQSection = () => {
                 className={`w-2 h-2 rounded-full ${
                   index === currentPage ? "bg-[#101010]" : "bg-[#CCCCCC]"
                 }`}
+                aria-label={`Go to page ${index + 1}`}
+                aria-current={index === currentPage ? "page" : undefined}
               ></button>
             ))}
           </div>
@@ -171,6 +174,7 @@ const FAQSection = () => {
             onClick={goToNext}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-[#EEEEEE] text-black hover:bg-[#FF7900] cursor-pointer disabled:opacity-50"
             disabled={currentPage === totalPages - 1}
+            aria-label="Go to next page"
           >
             <ChevronRight />
           </button>

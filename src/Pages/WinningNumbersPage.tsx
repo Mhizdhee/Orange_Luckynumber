@@ -6,7 +6,7 @@ import Socials from "../Components/Socials";
 import HeroBg from "../assets/Images/heroimg.png";
 import Background from "../assets/Images/Background-img.png";
 import MobileBackground from "../assets/Images/mobilebg-img .png";
-import { useWinner } from "../Context/WinnerContext";
+import { useWinner } from "../hooks/useWinner";
 
 const WinningNumbersPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,35 +21,22 @@ const WinningNumbersPage: React.FC = () => {
   >([]);
 
   useEffect(() => {
-    if (!data || !data.results || data.results.length === 0) return;
-
+    // if (!data || !data.results || data.results.length === 0) return;
+    if (!data || !data.results || data.results.length === 0) {
+      setDrawData([]);
+      return;
+    }
     const latestDraw = data.results[0];
 
-    const services = [
-      "Lucky Number MAX",
-      "Lucky Number Eco",
-      "Lucky Number Premium",
-    ];
-
-    // const services = [
-    //   "GLO Lucky Number Max Auto",
-    //   "YoUSD Daily LN",
-    //   "YoUSD Weekly LN",
-    // ];
-
-    const groupedDraws = services
-      .map((service) => {
-        const result = latestDraw.drawResults.find(
-          (r) => r.serviceName === service
-        );
-
-        if (!result) return null;
-
+    const groupedDraws = latestDraw.drawResults
+      .map((result) => {
         const formattedNumber = result.winningNumber;
-        const winners = Array(result.numWinners).fill(`07${formattedNumber}`);
-
+        const winners = Array.from(
+          { length: result.numWinners },
+          () => formattedNumber
+        );
         return {
-          service,
+          service: result.serviceName,
           date: latestDraw.drawDate,
           winningNumber: formattedNumber,
           winners,
@@ -70,10 +57,11 @@ const WinningNumbersPage: React.FC = () => {
   }, [data]);
 
   const allScrollItems = drawData.flatMap((entry) =>
-    entry.winners.map((winner) => ({
+    entry.winners.map((winner, index) => ({
       number: winner,
       service: entry.service,
       date: entry.date,
+      id: `${entry.service}-${index}`,
     }))
   );
 
@@ -92,6 +80,7 @@ const WinningNumbersPage: React.FC = () => {
             <div className="w-full md:w-1/2   ">
               <button
                 onClick={() => navigate("/")}
+                aria-label="back"
                 className="font-[Inter]  text-[14px] leading-[22px] font-normal mb-6 text-[#8F8F8F] hover:text-white cursor-pointer"
               >
                 ← Back
@@ -106,7 +95,7 @@ const WinningNumbersPage: React.FC = () => {
                 <div className="flex flex-col  gap-5  bg-[#151515] overflow-y-auto max-h-120">
                   <ol className="list-decimal py-6 px-12 space-y-5  font-['RethinkSans-SemiBold'] font-semibold text-[16px] leading-[24px] text-justify text-[#8F8F8F]">
                     {allScrollItems.map((item, idx) => (
-                      <li key={idx} className="min-w-fit ">
+                      <li key={`${item.service}-${idx}`} className="min-w-fit ">
                         <h5 className="text-[#8F8F8F] font-['RethinkSans-SemiBold'] font-semibold text-[16px] lg:text-[18px] leading-[26px]">
                           {item.number}
                         </h5>
@@ -125,6 +114,7 @@ const WinningNumbersPage: React.FC = () => {
               <img
                 src={HeroBg}
                 alt="Winning"
+                loading="lazy"
                 // className="w-full h-full object-contain rounded-lg"
               />
             </div>
@@ -145,6 +135,7 @@ const WinningNumbersPage: React.FC = () => {
             <div className="w-full  ">
               <button
                 onClick={() => navigate("/")}
+                aria-label="back"
                 className="font-[Inter]  text-[14px] leading-[22px] font-normal mb-6 text-[#8F8F8F] hover:text-white cursor-pointer"
               >
                 ← Back
@@ -158,7 +149,7 @@ const WinningNumbersPage: React.FC = () => {
                 <div className="flex flex-col  gap-5  bg-[#151515] overflow-y-auto max-h-120">
                   <ol className="list-decimal py-6 px-12 space-y-5  font-['RethinkSans-SemiBold'] font-semibold text-[16px] leading-[24px] text-justify text-[#8F8F8F]">
                     {allScrollItems.map((item, idx) => (
-                      <li key={idx} className="min-w-fit ">
+                      <li key={`${item.service}-${idx}`} className="min-w-fit ">
                         <h5 className="text-[#8F8F8F] font-['RethinkSans-SemiBold'] font-semibold text-[16px] lg:text-[18px] leading-[26px]">
                           {item.number}
                         </h5>
@@ -174,7 +165,12 @@ const WinningNumbersPage: React.FC = () => {
 
             {/* Right: Image */}
             <div className="  w-full lg:hidden justify-center px-4 ">
-              <img src={HeroBg} alt="Winning" className="w-full h-full " />
+              <img
+                src={HeroBg}
+                alt="Winning"
+                loading="lazy"
+                className="w-full h-full "
+              />
             </div>
           </div>
 

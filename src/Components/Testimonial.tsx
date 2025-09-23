@@ -86,6 +86,7 @@ const Testimonial: React.FC = () => {
                         <img
                           src={Logo}
                           alt="Geraldine"
+                          loading="lazy"
                           className="w-20 h-20 rounded-[100px] border-4  border-[#EC7000] object-cover "
                         />
                         <span className="font-semibold font-['RethinkSans-Bold'] text-[20px] lg:text-[24px] leading-[28px] lg:leading-[40px] text-[#101010]">
@@ -117,11 +118,17 @@ const Testimonial: React.FC = () => {
                           <img
                             src={ThumbnailImage}
                             alt="Video thumbnail"
+                            loading="lazy"
                             className="w-full h-full object-cover "
                           />
                           <div className="absolute inset-0 flex items-center justify-center bg-black/40 ">
                             <div className="w-9 h-9 bg-[#FFFFFF66] rounded-full flex items-center justify-center">
-                              <img src={Play} alt="play" className="w-3 h-3" />
+                              <img
+                                src={Play}
+                                alt="play"
+                                className="w-3 h-3"
+                                loading="lazy"
+                              />
                             </div>
                           </div>
                         </div>
@@ -142,6 +149,7 @@ const Testimonial: React.FC = () => {
                         <img
                           src={Logo}
                           alt="Geraldine"
+                          loading="lazy"
                           className="w-20 h-20 rounded-[100px] border-4  border-[#EC7000] object-cover"
                         />
                         <span className="font-semibold font-['RethinkSans-Bold'] text-[20px] lg:text-[24px] leading-[28px] lg:leading-[40px] text-[#101010]">
@@ -171,11 +179,17 @@ const Testimonial: React.FC = () => {
                           <img
                             src={ThumbnailImage}
                             alt="Video thumbnail"
+                            loading="lazy"
                             className="w-full h-full object-cover "
                           />
                           <div className="absolute inset-0 flex items-center justify-center bg-black/40 ">
                             <div className="w-9 h-9 bg-[#FFFFFF66] rounded-full flex items-center justify-center">
-                              <img src={Play} alt="play" className="w-3 h-3" />
+                              <img
+                                src={Play}
+                                alt="play"
+                                className="w-3 h-3"
+                                loading="lazy"
+                              />
                             </div>
                           </div>
                         </div>

@@ -5,7 +5,7 @@ import MobileBackground from "../assets/Images/mobilebg-img .png";
 import NumberImg from "../assets/Images/BackgroundDis.png";
 import { motion } from "framer-motion";
 import WinningNumbersSection from "./WinninNumbersSection";
-import { useWinner } from "../Context/WinnerContext";
+import { useWinner } from "../hooks/useWinner";
 import SubscribeModal from "../Components/SubscribeModal";
 
 const HeroSection: React.FC = () => {
@@ -20,6 +20,17 @@ const HeroSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
   const animationRef = useRef<NodeJS.Timeout | null>(null);
+
+  const getYesterdayDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() - 1);
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  const yesterdayDate = getYesterdayDate();
 
   useEffect(() => {
     if (isLoading && !data) {
@@ -56,29 +67,22 @@ const HeroSection: React.FC = () => {
       return;
     }
 
-    const orangeServices = [
-      "Lucky Number MAX",
-      "Lucky Number Eco",
-      "Lucky Number Premium",
-      "IC Orange Lucky Number Eco",
-    ];
-    const orangeResult = results.find((result) =>
-      orangeServices.includes(result.serviceName)
-    );
+    const firstWinningNumber = results[0]?.winningNumber;
 
-    if (!orangeResult || !orangeResult.winningNumber) {
-      const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+    if (!firstWinningNumber) {
+      const fallbackNumber = ["0", "5", "X", "X", "0", "0", "0", "0", "0", "0"];
       setAnimatedNumbers(fallbackNumber);
       setIsAnimating(true);
       return;
     }
 
-    const formattedNumber = ("07" + orangeResult.winningNumber).split("");
+    const formattedNumber = ("07" + results[0]?.winningNumber).split("");
+
     setTimeout(() => {
       setAnimatedNumbers(formattedNumber);
       setTimeout(() => setIsAnimating(true), 100);
     }, 600);
-  }, [isLoading, data]);
+  }, [isLoading, data, yesterdayDate]);
 
   return (
     <>
@@ -127,6 +131,7 @@ const HeroSection: React.FC = () => {
                     }
                     setIsModalOpen(true);
                   }}
+                  aria-label="sabonner"
                   className="w-[327px] mx-auto md:mx-auto lg:mx-0 md:w-[70%] lg:w-1/2 bg-[#FF7900] hover:bg-[#101010] py-[10px] px-4 text-[#101010] hover:text-[#FFF] text-[16px] font-[Inter] font-medium leading-[24px] cursor-pointer"
                 >
                   S'abonner
@@ -163,6 +168,7 @@ const HeroSection: React.FC = () => {
                     <img
                       src={NumberImg}
                       alt="number-bg"
+                      loading="lazy"
                       className="w-full h-full object-fit"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -205,6 +211,7 @@ const HeroSection: React.FC = () => {
               <img
                 src={HeroBg}
                 alt="heroimg"
+                loading="lazy"
                 className="w-full max-w-[375px] sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[680px]"
               />
             </div>
@@ -233,6 +240,7 @@ const HeroSection: React.FC = () => {
               <div className="mt-8 flex items-center gap-2">
                 <button
                   onClick={() => setIsSubscribeModalOpen(true)}
+                  aria-label="sabonner"
                   className="w-[327px] mx-auto md:mx-auto lg:mx-0 md:w-[70%] lg:w-1/2 bg-[#FF7900] hover:bg-[#101010] py-[10px] px-4 text-[#101010] hover:text-[#FFFFFF] text-[16px] font-[Inter] font-medium leading-[24px]"
                 >
                   S'abonner
@@ -258,6 +266,7 @@ const HeroSection: React.FC = () => {
                     <img
                       src={NumberImg}
                       alt="number-bg"
+                      loading="lazy"
                       className="w-full h-full object-fit"
                     />
                     <div className="absolute inset-0 flex items-center justify-center px-6">
@@ -300,6 +309,7 @@ const HeroSection: React.FC = () => {
               <img
                 src={HeroBg}
                 alt="heroimg"
+                loading="lazy"
                 className="w-full max-w-[375px] mx-auto sm:max-w-[400px] lg:max-w-[450px] xl:max-w-[680px]"
               />
             </div>
@@ -311,6 +321,7 @@ const HeroSection: React.FC = () => {
             <div className="bg-[#FFFFFF] p-6 mx-4 rounded-lg w-full max-w-md relative">
               <button
                 onClick={() => setIsSubscribeModalOpen(false)}
+                aria-label="close"
                 className="absolute top-2 right-3 text-xl leading-[22px] font-bold font-[Inter]"
               >
                 ×

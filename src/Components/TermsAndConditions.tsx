@@ -733,6 +733,7 @@ const TermsAndConditions: React.FC = () => {
       <div className="mt-10 text-center font-inria">
         <button
           onClick={() => navigate(-1)}
+          aria-label="back"
           className="bg-ffgray text-black px-6 py-2 rounded-md hover:underline transition font-inria cursor-pointer"
         >
           Retour

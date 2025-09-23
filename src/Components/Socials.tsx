@@ -14,20 +14,25 @@ const Socials: React.FC = () => {
             rel="noopener noreferrer"
             className="hover:text-white text-center"
           >
-            <img src={Twitter} alt="twitter" />
+            <img src={Twitter} alt="twitter" loading="lazy" />
           </a>
           <a
             href="#"
             rel="noopener noreferrer"
             className="hover:text-white  flex items-center"
           >
-            <img src={Facebook} alt="facebook" />
+            <img src={Facebook} alt="facebook" loading="lazy" />
           </a>
           <a href="#" rel="noopener noreferrer" className="hover:text-white">
-            <img src={Linkedn} alt="linkedn" />
+            <img src={Linkedn} alt="linkedn" loading="lazy" />
           </a>
           <a href="#" rel="noopener noreferrer" className="hover:text-white">
-            <img src={Instagram} alt="instagram" className="hover:text-white" />
+            <img
+              src={Instagram}
+              alt="instagram"
+              className="hover:text-white"
+              loading="lazy"
+            />
           </a>
         </div>
         <p className="font-[Inter] font-normal text-[14px] leading-[22px] text-[#8F8F8F] text-center lg:text-right">

@@ -3,7 +3,7 @@ import NumberImg from "../assets/Images/BackgroundDis.png";
 import Confettis from "../assets/Images/confettis.png";
 import MobileConfettis from "../assets/Images/mobile-confettis.png";
 import { motion } from "framer-motion";
-import { useWinner } from "../Context/WinnerContext";
+import { useWinner } from "../hooks/useWinner";
 
 interface LuckyNumberBarProps {
   triggerRef: React.RefObject<HTMLElement | null>;
@@ -17,6 +17,17 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
   );
   const { data, isLoading } = useWinner();
   const animationRef = useRef<NodeJS.Timeout | null>(null);
+
+  const getYesterdayDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() - 1);
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  const yesterdayDate = getYesterdayDate();
 
   // Scroll observer for visibility
   useEffect(() => {
@@ -71,30 +82,40 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
       return;
     }
 
-    // Only consider Orange services
-    const orangeServices = [
-      "Lucky Number MAX",
-      "Lucky Number Eco",
-      "Lucky Number Premium",
-      "IC Orange Lucky Number Eco",
-    ];
-    const orangeResult = results.find((result) =>
-      orangeServices.includes(result.serviceName)
-    );
+    // // Only consider Orange services
+    // const orangeServices = [
+    //   "Glo Lucky Number MAX",
+    //   "Glo Lucky Number Eco",
+    //   "Glo Lucky Number Premium",
+    //   "IC Orange Lucky Number Eco",
+    // ];
+    // const orangeResult = results.find((result) =>
+    //   orangeServices.includes(result.serviceName)
+    // );
 
-    if (!orangeResult || !orangeResult.winningNumber) {
-      const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+    // if (!orangeResult || !orangeResult.winningNumber) {
+    //   const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
+    //   setAnimatedNumbers(fallbackNumber);
+    //   setIsAnimating(true);
+    //   return;
+    // }
+
+    const firstWinningNumber = results[0]?.winningNumber;
+
+    if (!firstWinningNumber) {
+      const fallbackNumber = ["0", "5", "X", "X", "0", "0", "0", "0", "0", "0"];
       setAnimatedNumbers(fallbackNumber);
       setIsAnimating(true);
       return;
     }
 
-    const formattedNumber = ("07" + orangeResult.winningNumber).split("");
+    const formattedNumber = ("07" + results[0]?.winningNumber).split("");
+
     setTimeout(() => {
       setAnimatedNumbers(formattedNumber);
       setTimeout(() => setIsAnimating(true), 100);
     }, 600);
-  }, [isLoading, data]);
+  }, [isLoading, data, yesterdayDate]);
 
   return (
     <>
@@ -104,11 +125,13 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
             <img
               src={Confettis}
               alt="desktop-bg"
+              loading="lazy"
               className="hidden md:block w-full h-auto"
             />
             <img
               src={MobileConfettis}
               alt="mobile-bg"
+              loading="lazy"
               className="block md:hidden w-full h-auto"
             />
 
@@ -133,6 +156,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
                 <img
                   src={NumberImg}
                   alt="number-bg"
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 flex items-center justify-center gap-1 px-8  md:px-4">

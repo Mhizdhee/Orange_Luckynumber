@@ -27,7 +27,12 @@ const HowToPlay: React.FC = () => {
             {/* Step 1 */}
 
             <div className="flex flex-col items-center text-left w-full max-w-[340px]">
-              <img src={Phone1} alt="Step 1" className=" object-contain mb-4" />
+              <img
+                src={Phone1}
+                alt="Step 1"
+                loading="lazy"
+                className=" object-contain mb-4"
+              />
               <div className="flex items-center gap-6">
                 <p className="text-[148px] font-[Bangers] font-normal leading-[108px] text-[#242424]">
                   1
@@ -72,6 +77,7 @@ const HowToPlay: React.FC = () => {
               <img
                 src={Phone3}
                 alt="Step 2"
+                loading="lazy"
                 className="object-contain mx-auto mb-4"
               />
               <div className="flex items-center text-left gap-6">

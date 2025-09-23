@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useWinner } from "../Context/WinnerContext";
+import { useWinner } from "../hooks/useWinner";
 
 const WinningNumbersSection: React.FC = () => {
   const { data, isLoading, error } = useWinner();
@@ -24,32 +24,13 @@ const WinningNumbersSection: React.FC = () => {
 
     const latestDraw = data.results[0];
 
-    const services = [
-      "Lucky Number MAX",
-      "Lucky Number Eco",
-      "Lucky Number Premium",
-      "IC Orange Lucky Number Eco",
-    ];
-
-    // const services = [
-    //   "GLO Lucky Number Max Auto",
-    //   "YoUSD Daily LN",
-    //   "YoUSD Weekly LN",
-    // ];
-
-    const groupedDraws = services
-      .map((service) => {
-        const result = latestDraw.drawResults.find(
-          (r) => r.serviceName === service
-        );
-
-        if (!result) return null;
-
+    const groupedDraws = latestDraw.drawResults
+      .map((result) => {
         const formattedNumber = result.winningNumber;
         const winners = Array(result.numWinners).fill(`07${formattedNumber}`);
 
         return {
-          service,
+          service: result.serviceName,
           date: latestDraw.drawDate,
           winningNumber: formattedNumber,
           winners,
@@ -114,7 +95,10 @@ const WinningNumbersSection: React.FC = () => {
   if (error) {
     return (
       <div className="bg-[#242424] px-4 xl:px-30 py-6 w-full overflow-hidden">
-        <div className="text-red-500 text-center">{error}</div>
+        <div className="text-red-500 text-center">
+          {" "}
+          {error instanceof Error ? error.message : error.toString()}
+        </div>
       </div>
     );
   }
@@ -152,6 +136,7 @@ const WinningNumbersSection: React.FC = () => {
             <button
               className="text-[#8F8F8F] font-[Inter] text-[14px] leading-[22px] font-normal cursor-pointer whitespace-nowrap"
               onClick={() => navigate("/winning-numbers")}
+              aria-label="view"
             >
               View All
             </button>
@@ -181,6 +166,7 @@ const WinningNumbersSection: React.FC = () => {
           <button
             className="text-[#8F8F8F] font-[Inter] text-[14px] leading-[22px] font-normal cursor-pointer hover:text-white whitespace-nowrap"
             onClick={() => navigate("/winning-numbers")}
+            aria-label="view"
           >
             View All
           </button>

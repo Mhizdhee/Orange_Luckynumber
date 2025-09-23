@@ -18,6 +18,7 @@ const NotFound: React.FC = () => {
         </p>
         <button
           onClick={() => navigate("/")}
+          aria-label="Go to home"
           className="bg-[#FF7900] font-[Inter] text-black px-6 py-2 rounded-lg hover:bg-[#101010] hover:text-white transition cursor-pointer"
         >
           Go Back Home

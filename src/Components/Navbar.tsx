@@ -21,6 +21,7 @@ const Navbar: React.FC = () => {
           <img
             src={OrangeLogo}
             alt="logo"
+            loading="lazy"
             className="border-r border-r-[#8F8F8F] pr-3 h-8"
           />
           <img src={LuckyLogo} alt="luckylogo" className="pl-3 h-8" />

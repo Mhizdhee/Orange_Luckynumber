@@ -25,9 +25,15 @@ const Footer: React.FC = () => {
               <img
                 src={OrangeLogo}
                 alt="orange logo"
+                loading="lazy"
                 className="border-r border-r-[#8F8F8F] pr-3 h-10"
               />
-              <img src={LuckyLogo} alt="Lucky number logo" className="h-10" />
+              <img
+                src={LuckyLogo}
+                alt="Lucky number logo"
+                loading="lazy"
+                className="h-10"
+              />
             </div>
 
             <div className="flex flex-col lg:flex-row gap-6">
@@ -93,7 +99,7 @@ const Footer: React.FC = () => {
               Contactez-nous
             </h4>
             <div className="flex items-start gap-2">
-              <img src={Location} alt="location" />
+              <img src={Location} alt="location" loading="lazy" />
               <p className="font-[Inter] font-normal text-[14px] leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]">
                 adresse : Abidjan, Cocody, Riviera Golf, « Orange Village », 11
                 BP 202 Abidjan 11{" "}
@@ -101,7 +107,7 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 w-full hover:text-[#FFFFFF]">
               <div className="flex items-center gap-2">
-                <img src={Contact} alt="contact" />
+                <img src={Contact} alt="contact" loading="lazy" />
 
                 <p className="font-[Inter] font-normal text-[14px]  leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]">
                   {/* +2374446693434 */} 0808
@@ -109,7 +115,7 @@ const Footer: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                <img src={Mail} alt="mail" />
+                <img src={Mail} alt="mail" loading="lazy" />
 
                 <a
                   href="mailto:Orangeluckynumber@email.com"
@@ -124,7 +130,7 @@ const Footer: React.FC = () => {
               onClick={() => setIsContactOpen(true)}
               className="flex items-center gap-2"
             >
-              <img src={Share} alt="share" />
+              <img src={Share} alt="share" loading="lazy" />
 
               <p className="font-[Inter] font-normal text-[14px] leading-[22px] text-[#8F8F8F] hover:text-[#FFFFFF]">
                 Envoyez un message

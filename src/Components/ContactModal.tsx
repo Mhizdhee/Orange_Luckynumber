@@ -47,6 +47,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 bg-[#10101090] bg-opacity-50 z-70 flex items-center justify-center">
       <div className="bg-white px-4 pt-4 pb-6 mx-2 md:px-6 md:pt-6 md:pb-10  w-full max-w-lg relative">
         <button
+          aria-label="close"
           className="absolute top-3 right-3 text-[#1C1C1C] text-2xl cursor-pointer font-normal"
           onClick={onClose}
         >
@@ -118,6 +119,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
           <button
             type="submit"
             disabled={isLoading}
+            aria-label="send"
             className="mt-4 w-full bg-[#FF7900] hover:bg-[#101010] font-[Inter] font-medium text-[16px] leading-[24px] text-[#101010] px-4 py-[10px] rounded-md hover:text-[#ffffff] transition cursor-pointer"
           >
             {isLoading ? (
@@ -152,6 +154,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             </p>
             <button
               onClick={() => setShowPopup(false)}
+              aria-label="fermer"
               className="mt-4 text-[#EBBA9D] font-[Poppins] font-light text-[18px] leading-[22px] hover:underline cursor-pointer"
             >
               Fermer

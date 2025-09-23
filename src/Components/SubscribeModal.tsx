@@ -72,6 +72,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ onClose, msisdn }) => {
       <div className="bg-white p-6 mx-4 rounded-lg w-full max-w-md relative">
         <button
           onClick={onClose}
+          aria-label="close"
           className="absolute top-2 right-3 text-xl leading-[22px] font-bold font-[Inter]"
         >
           ×
