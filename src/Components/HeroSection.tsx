@@ -32,23 +32,23 @@ const HeroSection: React.FC = () => {
 
   const yesterdayDate = getYesterdayDate();
 
-  useEffect(() => {
-    if (isLoading && !data) {
-      animationRef.current = setInterval(() => {
-        const randomDigits = Array.from({ length: 6 }, () =>
-          Math.floor(Math.random() * 10).toString()
-        );
-        const randomNumber = ["0", "7", "X", "X", ...randomDigits];
-        setAnimatedNumbers(randomNumber);
-      }, 100);
-    }
+  // useEffect(() => {
+  //   if (isLoading && !data) {
+  //     animationRef.current = setInterval(() => {
+  //       const randomDigits = Array.from({ length: 6 }, () =>
+  //         Math.floor(Math.random() * 10).toString()
+  //       );
+  //       const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+  //       setAnimatedNumbers(randomNumber);
+  //     }, 100);
+  //   }
 
-    return () => {
-      if (animationRef.current) {
-        clearInterval(animationRef.current);
-      }
-    };
-  }, [isLoading, data]);
+  //   return () => {
+  //     if (animationRef.current) {
+  //       clearInterval(animationRef.current);
+  //     }
+  //   };
+  // }, [isLoading, data]);
 
   useEffect(() => {
     if (isLoading || !data) return;

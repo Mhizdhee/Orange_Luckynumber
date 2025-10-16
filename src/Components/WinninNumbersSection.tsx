@@ -3,15 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useWinner } from "../hooks/useWinner";
 
 const WinningNumbersSection: React.FC = () => {
-  const { data, isLoading, error } = useWinner();
+  const { rawData, isLoading, error } = useWinner();
   const navigate = useNavigate();
 
-  const [drawData, setDrawData] = useState<
+  const [scrollItems, setScrollItems] = useState<
     {
+      msisdn: string;
       service: string;
       date: string;
-      winningNumber: string;
-      winners: string[];
     }[]
   >([]);
 
@@ -19,41 +18,67 @@ const WinningNumbersSection: React.FC = () => {
   const directionRef = useRef<"left" | "right">("left");
   const animationRef = useRef<number | null>(null);
 
+  // useEffect(() => {
+  //   if (!data || !data.results || data.results.length === 0) return;
+
+  //   const latestDraw = data.results[0];
+
+  //   const groupedDraws = latestDraw.drawResults
+  //     .map((result) => {
+  //       const formattedNumber = result.winningNumber;
+  //       const winners = Array(result.numWinners).fill(`07${formattedNumber}`);
+
+  //       return {
+  //         service: result.serviceName,
+  //         date: latestDraw.drawDate,
+  //         winningNumber: formattedNumber,
+  //         winners,
+  //       };
+  //     })
+  //     .filter(
+  //       (
+  //         item
+  //       ): item is {
+  //         service: string;
+  //         date: string;
+  //         winningNumber: string;
+  //         winners: string[];
+  //       } => item !== null
+  //     );
+
+  //   setDrawData(groupedDraws);
+  // }, [data]);
+
   useEffect(() => {
-    if (!data || !data.results || data.results.length === 0) return;
+    if (!rawData || rawData.length === 0) return;
 
-    const latestDraw = data.results[0];
+    const allMsisdns: { msisdn: string; service: string; date: string }[] = [];
 
-    const groupedDraws = latestDraw.drawResults
-      .map((result) => {
-        const formattedNumber = result.winningNumber;
-        const winners = Array(result.numWinners).fill(`07${formattedNumber}`);
+    rawData.forEach((apiResponse: any) => {
+      if (!apiResponse?.data?.winnersByDate?.length) return;
 
-        return {
-          service: result.serviceName,
-          date: latestDraw.drawDate,
-          winningNumber: formattedNumber,
-          winners,
-        };
-      })
-      .filter(
-        (
-          item
-        ): item is {
-          service: string;
-          date: string;
-          winningNumber: string;
-          winners: string[];
-        } => item !== null
-      );
+      apiResponse.data.winnersByDate.forEach((dateData: any) => {
+        if (!dateData.winners?.length) return;
 
-    setDrawData(groupedDraws);
-  }, [data]);
+        dateData.winners.forEach((winner: any) => {
+          if (winner.subscriber?.msisdn) {
+            allMsisdns.push({
+              msisdn: winner.subscriber.msisdn,
+              service: winner.prize?.serviceName || "Unknown",
+              date: dateData.date,
+            });
+          }
+        });
+      });
+    });
+
+    setScrollItems(allMsisdns);
+  }, [rawData]);
 
   // Auto-scroll animation
   useEffect(() => {
     const container = scrollRef.current;
-    if (!container || drawData.length === 0) return;
+    if (!container || scrollItems.length === 0) return;
 
     const speed = 0.8;
 
@@ -82,8 +107,7 @@ const WinningNumbersSection: React.FC = () => {
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [drawData]);
-
+  }, [scrollItems]);
   if (isLoading) {
     return (
       <div className="bg-[#242424] px-4 xl:px-30 py-6 w-full overflow-hidden">
@@ -103,7 +127,7 @@ const WinningNumbersSection: React.FC = () => {
     );
   }
 
-  if (!drawData.length) {
+  if (!scrollItems.length) {
     return (
       <div className="bg-[#242424] px-4 xl:px-30 py-6 w-full overflow-hidden">
         <div className="text-white text-center">No draw data available</div>
@@ -111,14 +135,7 @@ const WinningNumbersSection: React.FC = () => {
     );
   }
 
-  const allScrollItems = drawData.flatMap((entry) =>
-    entry.winners.map((winner) => ({
-      number: winner,
-      service: entry.service,
-      date: entry.date,
-    }))
-  );
-  const latestDate = drawData[0].date;
+  const latestDate = scrollItems[0]?.date || "";
 
   return (
     <div className="bg-[#242424] px-4 xl:px-30 py-6 w-full overflow-hidden">
@@ -129,7 +146,7 @@ const WinningNumbersSection: React.FC = () => {
               {latestDate}
             </h5>
             <h5 className="text-white font-['RethinkSans-SemiBold'] font-semibold text-[16px] leading-[26px] lg:text-[20px] lg:leading-[28px] text-center whitespace-nowrap">
-              Gagnants: {allScrollItems.length}
+              Gagnants: {scrollItems.length}
             </h5>
           </div>
           <div className="block xl:hidden">
@@ -147,13 +164,13 @@ const WinningNumbersSection: React.FC = () => {
           ref={scrollRef}
           className="flex items-center gap-6 ml-0 lg:ml-6 overflow-x-auto scrollbar-hide whitespace-nowrap w-full xl:max-w-[70%]"
         >
-          {allScrollItems.map((item, idx) => (
+          {scrollItems.map((item, idx) => (
             <div key={idx} className="min-w-fit text-center">
               <h5
                 key={idx}
                 className="text-[#8F8F8F] font-['RethinkSans-SemiBold'] font-semibold text-center text-[16px] lg:text-[18px] leading-[26px] min-w-fit"
               >
-                {item.number}{" "}
+                {item.msisdn}{" "}
               </h5>
               {/* <p className="text-xs font-['RethinkSans-SemiBold'] font-semibold  text-[#666]">
                 {item.service}

@@ -10,62 +10,52 @@ import { useWinner } from "../hooks/useWinner";
 
 const WinningNumbersPage: React.FC = () => {
   const navigate = useNavigate();
-  const { data } = useWinner();
-  const [drawData, setDrawData] = useState<
+  const { rawData, isLoading } = useWinner();
+  const [winnersList, setWinnersList] = useState<
     {
+      msisdn: string;
       service: string;
       date: string;
-      winningNumber: string;
-      winners: string[];
+      id: string;
     }[]
   >([]);
 
   useEffect(() => {
-    // if (!data || !data.results || data.results.length === 0) return;
-    if (!data || !data.results || data.results.length === 0) {
-      setDrawData([]);
+    if (!rawData || rawData.length === 0) {
+      setWinnersList([]);
       return;
     }
-    const latestDraw = data.results[0];
 
-    const groupedDraws = latestDraw.drawResults
-      .map((result) => {
-        const formattedNumber = result.winningNumber;
-        const winners = Array.from(
-          { length: result.numWinners },
-          () => formattedNumber
-        );
-        return {
-          service: result.serviceName,
-          date: latestDraw.drawDate,
-          winningNumber: formattedNumber,
-          winners,
-        };
-      })
-      .filter(
-        (
-          item
-        ): item is {
-          service: string;
-          date: string;
-          winningNumber: string;
-          winners: string[];
-        } => item !== null
-      );
+    const allWinners: {
+      msisdn: string;
+      service: string;
+      date: string;
+      id: string;
+    }[] = [];
 
-    setDrawData(groupedDraws);
-  }, [data]);
+    rawData.forEach((apiResponse: any) => {
+      if (!apiResponse?.data?.winnersByDate?.length) return;
 
-  const allScrollItems = drawData.flatMap((entry) =>
-    entry.winners.map((winner, index) => ({
-      number: winner,
-      service: entry.service,
-      date: entry.date,
-      id: `${entry.service}-${index}`,
-    }))
-  );
+      apiResponse.data.winnersByDate.forEach((dateData: any) => {
+        if (!dateData.winners?.length) return;
 
-  const latestDate = drawData.length > 0 ? drawData[0].date : "";
+        dateData.winners.forEach((winner: any, index: number) => {
+          if (winner.subscriber?.msisdn) {
+            allWinners.push({
+              msisdn: winner.subscriber.msisdn,
+              service: winner.prize?.serviceName || "Unknown",
+              date: dateData.date,
+              id: `${winner.id}-${index}`,
+            });
+          }
+        });
+      });
+    });
+
+    setWinnersList(allWinners);
+  }, [rawData]);
+
+  const latestDate = winnersList.length > 0 ? winnersList[0].date : "";
 
   return (
     <>
@@ -89,15 +79,15 @@ const WinningNumbersPage: React.FC = () => {
               <div className="max-w-md  bg-[#242424]   px-4 pb-4 shadow-md text-white">
                 <div className="flex items-center gap-2 lg:text-[24px] text-[18px] py-6 leading-[26px] font-['RethinkSans-Bold'] font-bold lg:leading-[32px] text-center">
                   <p> {latestDate}</p>
-                  Gagnants: <span> {allScrollItems.length}</span>
+                  Gagnants: <span>{winnersList.length}</span>
                 </div>
 
                 <div className="flex flex-col  gap-5  bg-[#151515] overflow-y-auto max-h-120">
                   <ol className="list-decimal py-6 px-12 space-y-5  font-['RethinkSans-SemiBold'] font-semibold text-[16px] leading-[24px] text-justify text-[#8F8F8F]">
-                    {allScrollItems.map((item, idx) => (
-                      <li key={`${item.service}-${idx}`} className="min-w-fit ">
+                    {winnersList.map((winner) => (
+                      <li key={winner.id} className="min-w-fit">
                         <h5 className="text-[#8F8F8F] font-['RethinkSans-SemiBold'] font-semibold text-[16px] lg:text-[18px] leading-[26px]">
-                          {item.number}
+                          {winner.msisdn}
                         </h5>
                         {/* <p className="text-xs font-['RethinkSans-SemiBold'] font-semibold text-[#666]">
                           {item.service}
@@ -143,19 +133,19 @@ const WinningNumbersPage: React.FC = () => {
 
               <div className="max-w-lg  bg-[#242424]   px-4 pb-4 shadow-md text-white">
                 <h3 className="lg:text-[24px] text-[18px] py-6 leading-[26px] font-['RethinkSans-Bold'] font-bold lg:leading-[32px] text-center">
-                  {latestDate} Gagnants: {allScrollItems.length}
+                  {latestDate} Gagnants: {winnersList.length}
                 </h3>
 
                 <div className="flex flex-col  gap-5  bg-[#151515] overflow-y-auto max-h-120">
                   <ol className="list-decimal py-6 px-12 space-y-5  font-['RethinkSans-SemiBold'] font-semibold text-[16px] leading-[24px] text-justify text-[#8F8F8F]">
-                    {allScrollItems.map((item, idx) => (
-                      <li key={`${item.service}-${idx}`} className="min-w-fit ">
+                    {winnersList.map((winner) => (
+                      <li key={winner.id} className="min-w-fit">
                         <h5 className="text-[#8F8F8F] font-['RethinkSans-SemiBold'] font-semibold text-[16px] lg:text-[18px] leading-[26px]">
-                          {item.number}
+                          {winner.msisdn}{" "}
                         </h5>
-                        <p className="text-xs font-['RethinkSans-SemiBold'] font-semibold text-[#666]">
+                        {/* <p className="text-xs font-['RethinkSans-SemiBold'] font-semibold text-[#666]">
                           {item.service}
-                        </p>
+                        </p> */}
                       </li>
                     ))}
                   </ol>

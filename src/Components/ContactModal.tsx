@@ -29,7 +29,9 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
     try {
       const response = await axios.post(
-        "https://api.ydplatform.com:5542/contact-us",
+        // "https://api.ydplatform.com:5542/contact-us",
+        "https://84.200.73.130:5542/api/v1/ContactUs",
+
         {
           // const response = await axios.post("api/contact-us", {
           // await axios.post("api/contact-us", {

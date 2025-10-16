@@ -8,16 +8,20 @@ export default defineConfig({
   // server: {
   //   proxy: {
   //     "/api": {
-  //       target: "https://api.ydplatform.com:5542",
+  //       // target: "https://api.ydplatform.com:5542",
+  //       target: "https://84.200.73.130:5542",
   //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, ""),
-  //       // rewrite: (path) => path.replace(/^\/api/, "/api"),
+  //       secure: false,
+  //       // rewrite: (path) => path.replace(/^\/api/, ""),
+  //       rewrite: (path) => path.replace(/^\/api/, "/api"),
   //     },
   //     "/LN": {
-  //       target: "https://api.ydplatform.com:5542",
+  //       // target: "https://api.ydplatform.com:5542",
+  //       target: "https://84.200.73.130:5542",
   //       changeOrigin: true,
-  //       // rewrite: (path) => path.replace(/^\/LN/, "/LN"),
-  //       rewrite: (path) => path.replace(/^\/LN/, ""),
+  //       secure: false,
+  //       rewrite: (path) => path.replace(/^\/LN/, "/LN"),
+  //       // rewrite: (path) => path.replace(/^\/LN/, ""),
   //     },
   //   },
   // },

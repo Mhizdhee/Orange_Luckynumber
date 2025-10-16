@@ -48,23 +48,23 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     };
   }, [triggerRef]);
 
-  useEffect(() => {
-    if (isLoading && !data) {
-      animationRef.current = setInterval(() => {
-        const randomDigits = Array.from({ length: 6 }, () =>
-          Math.floor(Math.random() * 10).toString()
-        );
-        const randomNumber = ["0", "7", "X", "X", ...randomDigits];
-        setAnimatedNumbers(randomNumber);
-      }, 100);
-    }
+  // useEffect(() => {
+  //   if (isLoading && !data) {
+  //     animationRef.current = setInterval(() => {
+  //       const randomDigits = Array.from({ length: 6 }, () =>
+  //         Math.floor(Math.random() * 10).toString()
+  //       );
+  //       const randomNumber = ["0", "7", "X", "X", ...randomDigits];
+  //       setAnimatedNumbers(randomNumber);
+  //     }, 100);
+  //   }
 
-    return () => {
-      if (animationRef.current) {
-        clearInterval(animationRef.current);
-      }
-    };
-  }, [isLoading, data]);
+  //   return () => {
+  //     if (animationRef.current) {
+  //       clearInterval(animationRef.current);
+  //     }
+  //   };
+  // }, [isLoading, data]);
 
   useEffect(() => {
     if (isLoading || !data) return;
@@ -103,7 +103,7 @@ const LuckyNumberBar: React.FC<LuckyNumberBarProps> = ({ triggerRef }) => {
     const firstWinningNumber = results[0]?.winningNumber;
 
     if (!firstWinningNumber) {
-      const fallbackNumber = ["0", "5", "X", "X", "0", "0", "0", "0", "0", "0"];
+      const fallbackNumber = ["0", "7", "X", "X", "0", "0", "0", "0", "0", "0"];
       setAnimatedNumbers(fallbackNumber);
       setIsAnimating(true);
       return;
