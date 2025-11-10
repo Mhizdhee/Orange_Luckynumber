@@ -9,7 +9,8 @@ export default defineConfig({
   //   proxy: {
   //     "/api": {
   //       // target: "https://api.ydplatform.com:5542",
-  //       target: "https://84.200.73.130:5542",
+  //       // target: "https://84.200.73.130:5542",
+  //       target: "https://mtnghlnapi.ydaplatform.com",
   //       changeOrigin: true,
   //       secure: false,
   //       // rewrite: (path) => path.replace(/^\/api/, ""),
@@ -17,7 +18,8 @@ export default defineConfig({
   //     },
   //     "/LN": {
   //       // target: "https://api.ydplatform.com:5542",
-  //       target: "https://84.200.73.130:5542",
+  //       // target: "https://84.200.73.130: 5542",
+  //       target: "https://mtnghlnapi.ydaplatform.com",
   //       changeOrigin: true,
   //       secure: false,
   //       rewrite: (path) => path.replace(/^\/LN/, "/LN"),

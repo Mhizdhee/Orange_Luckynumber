@@ -103,7 +103,9 @@ export const WinnerProvider: React.FC<{ children: React.ReactNode }> = ({
   // );
   const apiUrls = serviceNames.map(
     (serviceName) =>
-      `https://84.200.73.130:5542/api/v1/Winners/fetch?drawDate=${drawDate}&serviceName=${serviceName}&lastXDraws=${lastXDraws}&includeFullData=${includeFullData}`
+      // `https://84.200.73.130:5542/api/v1/Winners/fetch?drawDate=${drawDate}&serviceName=${serviceName}&lastXDraws=${lastXDraws}&includeFullData=${includeFullData}`
+      `https://mtnghlnapi.ydaplatform.com/api/v1/Winners/fetch?drawDate=${drawDate}&serviceName=${serviceName}&lastXDraws=${lastXDraws}&includeFullData=${includeFullData}`
+
     // `/api/v1/Winners/fetch?drawDate=${drawDate}&serviceName=${serviceName}&lastXDraws=${lastXDraws}&includeFullData=${includeFullData}`
   );
 

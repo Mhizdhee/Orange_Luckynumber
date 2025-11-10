@@ -130,7 +130,7 @@ const WinningNumbersSection: React.FC = () => {
   if (!scrollItems.length) {
     return (
       <div className="bg-[#242424] px-4 xl:px-30 py-6 w-full overflow-hidden">
-        <div className="text-white text-center">No draw data available</div>
+        <div className="text-white text-center">Aucun gagnant trouvé</div>
       </div>
     );
   }
